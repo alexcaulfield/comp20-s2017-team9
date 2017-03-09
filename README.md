@@ -9,22 +9,22 @@
 * can have transitions between genres - ex: Uma Thurman by Fall Out Boy is Pop/Rock/Electronic so multiple choice would include songs of all those genres
 
 ## technologies:
-front-end framework - use React for both mobile and desktop
-(javascript framework?/RESTful)
-server-side persistance - hold high scores
-geolocation to show the closest venues you could be playing at and show a picture?
+* front-end framework - use React for both mobile and desktop
+* (javascript framework?/RESTful)
+* server-side persistance - hold high scores
+* (geolocation to show the closest venues you could be playing at and show a picture?)
 
 
-## Project title
+### Project title
 
-## Problem Statement
+### Problem Statement
 
-## How do you solve the problem?
+### How do you solve the problem?
 
-## List of all the features that your team will implement
+### List of all the features that your team will implement
 
-## What data will your prototype be using and collecting
+### What data will your prototype be using and collecting
 
-## Any algorithms or special techniques that will be necessary
+### Any algorithms or special techniques that will be necessary
 
-## Wireframs
+### Wireframs
