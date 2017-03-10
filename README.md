@@ -27,3 +27,14 @@ Have an interactive game that gives people more points for choosing songs that a
 * Calculating scores for each choice of next song
 
 ### Wireframes
+#### Homepage
+![Image of homepage](mockups/homepage.png)
+
+#### Play Setup page
+![Image of setup](mockups/setup.png)
+
+#### Play page
+![Image of play page](mockups/play-screen.png)
+
+#### Scoreboard
+![Image of scoreboard](mockups/scoreboard.png)
