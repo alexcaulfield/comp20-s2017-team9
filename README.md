@@ -38,3 +38,6 @@ Have an interactive game that gives people more points for choosing songs that a
 
 #### Scoreboard
 ![Image of scoreboard](mockups/scoreboard.png)
+
+#Comments by Ming
+* My only gripe is the title --it doesn't reflect the premise of this fantastic idea.  I was thinking it would be another academic flash card game but I was wrong, very wrong.
