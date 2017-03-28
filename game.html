@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pop Quiz Homepage</title>
+	<title>Game page</title>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -11,6 +11,8 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="main.css">
 
@@ -26,7 +28,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <div class="navbar-brand navbar-brand-centered">Pop Quiz</div>
+	      <div class="navbar-brand navbar-brand-centered"><a href="index.html">Pop Quiz</a></div>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,44 +38,39 @@
 	        <li><a href="#">About</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="game.html">Game</a></li>
+	        <li class="active"><a href="#">Game</a></li>
 	        <li><a href="#">Scoreboard</a></li>		        
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<img src="http://www.vanyaland.com/wp-content/uploads/2014/02/HouseOfBluesBostonMA.jpg" alt="House of Blues Boston">
+	<button class="btn btn-default" type="button" onclick="getSong()">Get a song</button>
 
-	<div class="container">
-	  <h2>Global Leaders</h2>          
-	  <table class="table table-striped table-bordered">
-	    <thead>
-	      <tr>
-	        <th>Rank</th>
-	        <th>Score</th>
-	        <th>DJ Name</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <tr>
-	        <td>1</td>
-	        <td>420</td>
-	        <td>Ollie</td>
-	      </tr>
-	      <tr>
-	        <td>2</td>
-	        <td>200</td>
-	        <td>Jerry</td>
-	      </tr>
-	      <tr>
-	        <td>3</td>
-	        <td>190</td>
-	        <td>Brock</td>
-	      </tr>
-	    </tbody>
-	  </table>
-	</div>
+	<div id="song-preview"></div>
+
+	<script type="text/javascript">
+	var previewUrl;
+	var previewTrack = document.getElementById('song-preview');
+	var audioObject = null;
+		function getSong() {
+		  $.ajax({
+			url: 'https://api.spotify.com/v1/tracks/619A7U0RtsSEvqJeJdazJ3',
+			data: {
+			  country: 'US'
+			},
+			success: function (response) {
+				console.log(response.preview_url);
+				previewUrl = response.preview_url;
+				audioObject = new Audio(); 
+				previewTrack.innerHTML = '<audio id="audio-player" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+			},
+			error: function (response) {
+			    console.log("ERROR: Track not found");
+			}
+		})
+		};
+	</script>
 
 </body>
-</html>
+</html>			
