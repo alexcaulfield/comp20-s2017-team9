@@ -8,9 +8,9 @@ Created formula to estimate similarity between songs:
 
 	This is to place the BPM value within the same range as the energy, danceability, and valence values.
 
-	simmilarity = .25(1 - difference in adjusted BPM) + .25(1 - difference in energy) + .25(1 - difference in danceability) + .25(1 - difference in valence)
+	similarity = .25(1 - difference in adjusted BPM) + .25(1 - difference in energy) + .25(1 - difference in danceability) + .25(1 - difference in valence)
 
-	simmilarity will be a value between 0 and 1 with 1 being the most simmilar and 0 being the least.
+	similarity will be a value between 0 and 1 with 1 being the most simmilar and 0 being the least.
 
 (2) Challenges faced this week:
 
