@@ -2,6 +2,8 @@ STATUS REPORT FOR WEEK 1
 
 (1) Accomplished this week:
 
+Created template for pages and developed basic setup for all pages
+
 Created formula to estimate similarity between songs: 
 
 	adjusted BPM = BPM/200 (if BPM > 200, adjBPM = 1)
@@ -16,7 +18,7 @@ Created formula to estimate similarity between songs:
 
 Working as a team using git and GitHub
 
-Understanding Bootstrap and getting a grasp of the front-end framework.
+Understanding Bootstrap and getting a grasp of the front-end framework
 
 (3) Goals for next week:
 
