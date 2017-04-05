@@ -35,18 +35,33 @@
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
+	
+	<button class="btn btn-default" type="button" onclick="getSong(1)">Song 1
+	<div id="song-preview1"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button" onclick="getSong()">Get a song</button>
+	<button class="btn btn-default" type="button" onclick="getSong(2)">Song 2
+	<div id="song-preview2"></div></button><br><br><br>
 
-	<div id="song-preview"></div>
+	<button class="btn btn-default" type="button" onclick="getSong(3)">Song 3
+	<div id="song-preview3"></div></button><br><br><br>
+
+	<button class="btn btn-default" type="button" onclick="getSong(4)">Song 4
+	<div id="song-preview4"></div></button>
 
 	<script type="text/javascript">
 	var previewUrl;
-	var previewTrack = document.getElementById('song-preview');
 	var audioObject = null;
-		function getSong() {
+	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
+						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3"];
+
+		function getSong(num) {
+			var song_url = "https://api.spotify.com/v1/tracks/";
+			var pre_track = 'song-preview';
+			pre_track += num;
+			var previewTrack = document.getElementById(pre_track);
+			song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%7];
 		  $.ajax({
-			url: 'https://api.spotify.com/v1/tracks/619A7U0RtsSEvqJeJdazJ3',
+			url: song_url,
 			data: {
 			  country: 'US'
 			},
