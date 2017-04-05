@@ -36,7 +36,7 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	<button class="btn btn-default" type="button" onclick="getSong(1)">Song 1
+	<button class="btn btn-default" type="button" onclick="getSong(1)"><div id="songname">Song 1</div>
 	<div id="song-preview1"></div></button><br><br><br>
 
 	<button class="btn btn-default" type="button" onclick="getSong(2)">Song 2
@@ -55,11 +55,15 @@
 						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3"];
 
 		function getSong(num) {
+
 			var song_url = "https://api.spotify.com/v1/tracks/";
+				song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%7];
+
 			var pre_track = 'song-preview';
-			pre_track += num;
+				pre_track += num;
+
 			var previewTrack = document.getElementById(pre_track);
-			song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%7];
+
 		  $.ajax({
 			url: song_url,
 			data: {
@@ -70,6 +74,7 @@
 				previewUrl = response.preview_url;
 				audioObject = new Audio(); 
 				previewTrack.innerHTML = '<audio id="audio-player" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+				songname.innerHTML = response.name;
 			},
 			error: function (response) {
 			    console.log("ERROR: Track not found");
