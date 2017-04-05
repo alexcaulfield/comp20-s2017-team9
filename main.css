@@ -33,3 +33,17 @@ img {
 	display: block;
 	margin: auto;
 }
+
+.center {
+    text-align: center;
+}
+
+.buffer {
+    padding-right: 15%;
+    padding-left: 15%;
+    padding-top: 2%;
+}
+
+.explanations {
+    font-size: 1.5em;
+}
