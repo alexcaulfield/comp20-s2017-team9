@@ -58,7 +58,7 @@
 	var previewUrl;
 	var audioObject = null;
 	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
-						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3"];
+						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3", "3cfOd4CMv2snFaKAnMdnvK"];
 	var song1 = "";
 	var song2 = "";
 	var song3 = "";
@@ -88,7 +88,7 @@
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
 
-				song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%7];
+				song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%(meme_songs.length)];
 			}
 
 			var pre_track = 'song-preview';
