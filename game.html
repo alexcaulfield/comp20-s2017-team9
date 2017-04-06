@@ -64,14 +64,13 @@
 	var song3 = "";
 	var song4 = "";
 
-/*
-		$.ajax({
+/*apparently to use this access token request needs to be made server-side*/
+		/*$.ajax({
 			url: "https://accounts.spotify.com/api/token",
 			method: "POST",
-			data: {grant_type: "client_credentials"},*/
+			data: {grant_type: "client_credentials"},
 
-			/* Getting an error with the access-control-allow-origin */
-			/*headers: {"Authorization": "Basics", "6098f27b8bbe48f4a1f7c74e68bc2884": "f836f513f2f64d2bb6f4f3def24d30de", "Access-Control-Allow-Origin": "*"},
+			headers: {"Authorization": "Basics", "6098f27b8bbe48f4a1f7c74e68bc2884": "f836f513f2f64d2bb6f4f3def24d30de", "Access-Control-Allow-Origin": "*"},
 			success: function (response){
 				console.log(response);
 			},
