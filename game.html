@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+
+<!-- Client ID: 6098f27b8bbe48f4a1f7c74e68bc2884 -->
+<!-- Client Secret: f836f513f2f64d2bb6f4f3def24d30de -->
+
+
 <html>
 <head>
 	<title>Game page</title>
@@ -49,6 +54,7 @@
 	<div id="song-preview4"></div></button>
 
 	<script type="text/javascript">
+
 	var previewUrl;
 	var audioObject = null;
 	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
@@ -58,19 +64,22 @@
 	var song3 = "";
 	var song4 = "";
 
+/*
+		$.ajax({
+			url: "https://accounts.spotify.com/api/token",
+			method: "POST",
+			data: {grant_type: "client_credentials"},*/
 
-		/*$.ajax({
-			url: "https://api.spotify.com/v1/users/simonwa7/playlists/5KuCBAhnUpUbnQwKhDhmUD/tracks",
-			data: {
-			  country: 'US'
-			},
-			success: function (response) {
+			/* Getting an error with the access-control-allow-origin */
+			/*headers: {"Authorization": "Basics", "6098f27b8bbe48f4a1f7c74e68bc2884": "f836f513f2f64d2bb6f4f3def24d30de", "Access-Control-Allow-Origin": "*"},
+			success: function (response){
 				console.log(response);
 			},
-			error: function (response) {
-			    console.log("ERROR: Track not found");
+			error: function (response){
+				console.log("ERROR");
 			}
 		})*/
+
 
 		function getSong(num) {
 
