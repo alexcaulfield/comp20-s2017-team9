@@ -23,3 +23,6 @@ Understanding Bootstrap and getting a grasp of the front-end framework
 (3) Goals for next week:
 
 Implement requests to the Spotify API for audio features of a particular track (Tempo, Energy, Danceability, etc.) This will require getting an an authorisation token from the web api using client credentials.
+
+#Comments by Ming
+* Do you need to use Bootstrap?
