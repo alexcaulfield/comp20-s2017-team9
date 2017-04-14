@@ -8,9 +8,12 @@
  */
 
 var request = require('request'); // "Request" library
+var express = require('express');
 
 var client_id = '6cf2ef39b7f7482c8b1bf8e82aa50d43'; // Your client id
 var client_secret = 'f034abd1393a4232b4fea34377a16943'; // Your secret
+
+var app = express();
 
 // your application requests authorization
 var authOptions = {
@@ -30,7 +33,7 @@ request.post(authOptions, function(error, response, body) {
     // use the access token to access the Spotify Web API
     var token = body.access_token;
     var options = {
-      url: 'https://api.spotify.com/v1/users/jmperezperez',
+      url: 'https://api.spotify.com/v1/audio-features/6snnRz6kK978tSyUdejEyg',
       headers: {
         'Authorization': 'Bearer ' + token
       },
@@ -41,3 +44,5 @@ request.post(authOptions, function(error, response, body) {
     });
   }
 });
+
+app.listen(8888);
