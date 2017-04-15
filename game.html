@@ -80,9 +80,9 @@
 		})*/
 
 
-		function makeRequest(){
-			console.log("make request")
-			$.get('https://api.spotify.com/v1/audio-features/6snnRz6kK978tSyUdejEyg', function(data){
+		function requestToken(){
+			console.log("make request");
+			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
 				console.log(data);
 			});
 
@@ -91,7 +91,7 @@
 		function getSong(num) {
 
 			var song_url = "https://api.spotify.com/v1/tracks/";
-			makeRequest();
+			requestToken();
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
 
