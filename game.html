@@ -73,10 +73,14 @@
 		function requestToken(){
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
                 access_token = data;
-                getSong(1);
-                getSong(2);
-                getSong(3);
-                getSong(4);
+                getSong(1, function(){
+                    getSong(2, function(){
+                        getSong(3, function(){
+                            getSong(4, function(){
+                            });
+                        });
+                    });
+                });
 			});
 		}
 
@@ -100,12 +104,11 @@
             })
         };
 
-		function getSong(num) {
+		function getSong(num, callback) {
 
 			var song_url = "https://api.spotify.com/v1/tracks/";
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
-
 				song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%(meme_songs.length)];
 			}
 
@@ -127,26 +130,31 @@
 					songname1.innerHTML = response.name;
 					song1 = song_url;
                     song1_id = song1.replace("https://api.spotify.com/v1/tracks/","");
+                    song1 = song_url;
                     get_song_features(song1_id);
 				}
 				else if (num == 2){
 					songname2.innerHTML = response.name;
 					song2 = song_url;
                     song2_id = song2.replace("https://api.spotify.com/v1/tracks/","");
+                    song2 = song_url;
                     get_song_features(song2_id);
 				}
 				else if (num ==3){
 					songname3.innerHTML = response.name;
 					song3 = song_url;
                     song3_id = song3.replace("https://api.spotify.com/v1/tracks/","");
+                    song3 = song_url;
                     get_song_features(song3_id);
 				}
 				else if (num ==4){
 					songname4.innerHTML = response.name;
 					song4 = song_url;
                     song4_id = song4.replace("https://api.spotify.com/v1/tracks/","");
+                    song4 = song_url;
                     get_song_features(song4_id);
 				}
+                callback();
 			},
 			error: function (response) {
 			    console.log("ERROR: Track not found");
