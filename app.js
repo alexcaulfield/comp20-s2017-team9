@@ -1,43 +1,20 @@
-/**
- * This is an example of a basic node.js script that performs
- * the Client Credentials oAuth2 flow to authenticate against
- * the Spotify Accounts.
- *
- * For more information, read
- * https://developer.spotify.com/web-api/authorization-guide/#client_credentials_flow
- */
+var SpotifyWebApi = require('spotify-web-api-node');
 
-var request = require('request'); // "Request" library
-
-var client_id = '6cf2ef39b7f7482c8b1bf8e82aa50d43'; // Your client id
-var client_secret = 'f034abd1393a4232b4fea34377a16943'; // Your secret
-
-// your application requests authorization
-var authOptions = {
-  url: 'https://accounts.spotify.com/api/token',
-  headers: {
-    'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-  },
-  form: {
-    grant_type: 'client_credentials'
-  },
-  json: true
-};
-
-request.post(authOptions, function(error, response, body) {
-  if (!error && response.statusCode === 200) {
-
-    // use the access token to access the Spotify Web API
-    var token = body.access_token;
-    var options = {
-      url: 'https://api.spotify.com/v1/users/jmperezperez',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      },
-      json: true
-    };
-    request.get(options, function(error, response, body) {
-      console.log(body);
-    });
-  }
+var spotifyApi = new SpotifyWebApi({
+  clientId : '6cf2ef39b7f7482c8b1bf8e82aa50d43',
+  clientSecret : 'f034abd1393a4232b4fea34377a16943'
 });
+
+// Retrieve an access token
+spotifyApi.clientCredentialsGrant()
+  .then(function(data) {
+    console.log('The access token expires in ' + data.body['expires_in']);
+    console.log('The access token is ' + data.body['access_token']);
+
+    // Save the access token so that it's used in future calls
+    spotifyApi.setAccessToken(data.body['access_token']);
+  }, function(err) {
+    console.log('Something went wrong when retrieving an access token', err.message);
+  });
+
+  //adding a comment haha

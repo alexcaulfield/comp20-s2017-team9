@@ -22,7 +22,7 @@
 		});
 	</script>
 </head>
-<body>
+<body onload="requestToken()">
     <nav class="navbar navbar-default" role="navigation">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,16 +50,16 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	<button class="btn btn-default" type="button" onclick="getSong(1)"><div id="songname1">Song 1</div>
+	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="getSong(1)" type="button"> pick this one</button></div>
 	<div id="song-preview1"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button" onclick="getSong(2)"><div id="songname2">Song 2</div>
+	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="getSong(2)" type="button"> pick this one</button></div>
 	<div id="song-preview2"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button" onclick="getSong(3)"><div id="songname3">Song 3</div>
+	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="getSong(3)" type="button"> pick this one</button></div>
 	<div id="song-preview3"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button" onclick="getSong(4)"><div id="songname4">Song 4</div>
+	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="getSong(4)" type="button"> pick this one</button></div>
 	<div id="song-preview4"></div></button>
 
 	<script type="text/javascript">
@@ -68,31 +68,50 @@
 	var audioObject = null;
 	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
 						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3", "3cfOd4CMv2snFaKAnMdnvK"];
+
 	var song1 = "";
+    var song1_id = "";
 	var song2 = "";
+    var song2_id = "";
 	var song3 = "";
+    var song3_id = "";
 	var song4 = "";
+    var song4_id = "";
+    var access_token = '';
 
-/*apparently to use this access token request needs to be made server-side*/
-		/*$.ajax({
-			url: "https://accounts.spotify.com/api/token",
-			method: "POST",
-			data: {grant_type: "client_credentials"},
+		function requestToken(){
+			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
+                access_token = data;
+                getSong(1);
+                getSong(2);
+                getSong(3);
+                getSong(4);
+			});
+		}
 
-			headers: {"Authorization": "Basics", "6098f27b8bbe48f4a1f7c74e68bc2884": "f836f513f2f64d2bb6f4f3def24d30de", "Access-Control-Allow-Origin": "*"},
-			success: function (response){
-				console.log(response);
-			},
-			error: function (response){
-				console.log("ERROR");
-			}
-		})*/
-
+        function get_song_features(song_id){
+            var song_url = 'https://api.spotify.com/v1/audio-features/' + song_id;
+            $.ajax({
+                url: song_url,
+                method: 'GET',
+                headers: {
+                	'Authorization': 'Bearer ' + access_token
+                },
+                data: {
+                    country: 'US'
+                },
+                success: function(response){
+                    console.log(response);
+                },
+                error: function(response){
+                    console.log ("ERROR with url: " + song_url + " and access token " + access_token);
+                }
+            })
+        };
 
 		function getSong(num) {
 
 			var song_url = "https://api.spotify.com/v1/tracks/";
-
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
 
@@ -110,25 +129,32 @@
 			  country: 'US'
 			},
 			success: function (response) {
-				console.log(response.preview_url);
 				previewUrl = response.preview_url;
 				audioObject = new Audio(); 
 				previewTrack.innerHTML = '<audio id="audio-player" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
 				if (num == 1){
 					songname1.innerHTML = response.name;
 					song1 = song_url;
+                    song1_id = song1.replace("https://api.spotify.com/v1/tracks/","");
+                    get_song_features(song1_id);
 				}
 				else if (num == 2){
 					songname2.innerHTML = response.name;
 					song2 = song_url;
+                    song2_id = song2.replace("https://api.spotify.com/v1/tracks/","");
+                    get_song_features(song2_id);
 				}
 				else if (num ==3){
 					songname3.innerHTML = response.name;
 					song3 = song_url;
+                    song3_id = song3.replace("https://api.spotify.com/v1/tracks/","");
+                    get_song_features(song3_id);
 				}
 				else if (num ==4){
 					songname4.innerHTML = response.name;
 					song4 = song_url;
+                    song4_id = song4.replace("https://api.spotify.com/v1/tracks/","");
+                    get_song_features(song4_id);
 				}
 			},
 			error: function (response) {
