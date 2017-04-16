@@ -41,16 +41,16 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	<button class="btn btn-default" type="button" onclick="getSong(1)"><div id="songname1">Song 1</div>
+	<button class="btn btn-default" type="button" onclick="getSong(1)"><div id="songname1">Song 1<button class="btn btn-default" type="button"> pick this one</button></div>
 	<div id="song-preview1"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button" onclick="getSong(2)"><div id="songname2">Song 2</div>
+	<button class="btn btn-default" type="button" onclick="getSong(2)"><div id="songname2">Song 2<button class="btn btn-default" type="button"> pick this one</button></div>
 	<div id="song-preview2"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button" onclick="getSong(3)"><div id="songname3">Song 3</div>
+	<button class="btn btn-default" type="button" onclick="getSong(3)"><div id="songname3">Song 3<button class="btn btn-default" type="button"> pick this one</button></div>
 	<div id="song-preview3"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button" onclick="getSong(4)"><div id="songname4">Song 4</div>
+	<button class="btn btn-default" type="button" onclick="getSong(4)"><div id="songname4">Song 4<button class="btn btn-default" type="button"> pick this one</button></div>
 	<div id="song-preview4"></div></button>
 
 	<script type="text/javascript">
@@ -73,6 +73,10 @@
 		function requestToken(){
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
                 access_token = data;
+                getSong(1);
+                getSong(2);
+                getSong(3);
+                getSong(4);
 			});
 		}
 
