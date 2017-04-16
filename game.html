@@ -64,22 +64,6 @@
 	var song3 = "";
 	var song4 = "";
 
-/*apparently to use this access token request needs to be made server-side*/
-		/*$.ajax({
-			url: "https://accounts.spotify.com/api/token",
-			method: "POST",
-			data: {grant_type: "client_credentials"},
-
-			headers: {"Authorization": "Basics", "6098f27b8bbe48f4a1f7c74e68bc2884": "f836f513f2f64d2bb6f4f3def24d30de", "Access-Control-Allow-Origin": "*"},
-			success: function (response){
-				console.log(response);
-			},
-			error: function (response){
-				console.log("ERROR");
-			}
-		})*/
-
-
 		function requestToken(){
 			console.log("make request");
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
