@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 
 </head>
-<body>
+<body onload="requestToken()">
     <nav class="navbar navbar-default" role="navigation">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -59,7 +59,6 @@
 	var audioObject = null;
 	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
 						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3", "3cfOd4CMv2snFaKAnMdnvK"];
-    //var SpotifyWebApi = require('spotify-web-api-node');
 
 	var song1 = "";
 	var song2 = "";
@@ -68,7 +67,6 @@
     var access_token = '';
 
 		function requestToken(){
-			console.log("make request");
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
 				console.log(data);
                 access_token = data;
@@ -76,9 +74,10 @@
 		}
 
         function get_song_features(song_id){
-            var song_url = "https://api.spotify.com/v1/audio-features/" + song_id;
+            var song_url = 'https://api.spotify.com/v1/audio-features/' + song_id;
             $.ajax({
                 url: song_url,
+                method: 'GET',
                 headers: {
                 	'Authorization': 'Bearer ' + access_token
                 },
@@ -97,7 +96,6 @@
 		function getSong(num) {
 
 			var song_url = "https://api.spotify.com/v1/tracks/";
-			requestToken();
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
 
