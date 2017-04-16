@@ -159,6 +159,8 @@
 			error: function (response) {
 			    console.log("ERROR: Track not found");
 			    console.log(song_url);
+                getSong(num);
+                callback();
 			}
 		})
 		};
