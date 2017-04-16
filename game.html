@@ -50,16 +50,16 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="getSong(1)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="getSong(1), update_prev(1)" type="button"> pick this one</button></div>
 	<div id="song-preview1"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="getSong(2)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="getSong(2), update_prev(2)" type="button"> pick this one</button></div>
 	<div id="song-preview2"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="getSong(3)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="getSong(3), update_prev(3)" type="button"> pick this one</button></div>
 	<div id="song-preview3"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="getSong(4)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="getSong(4), update_prev(4)" type="button"> pick this one</button></div>
 	<div id="song-preview4"></div></button>
 
 	<script type="text/javascript">
@@ -78,6 +78,22 @@
 	var song4 = "";
     var song4_id = "";
     var access_token = '';
+    var prev_song_id = '';
+
+    function update_prev(num){
+        var song = "song" + num;
+        if (num == 1){
+            prev_song_id = song1_id;
+        }else if (num ==2){
+            prev_song_id = song2_id;
+        }else if (num == 3){
+            prev_song_id = song3_id;
+        }else if (num == 4){
+            prev_song_id = song4_id;
+        }
+
+        console.log(prev_song_id);
+    }
 
 		function requestToken(){
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
