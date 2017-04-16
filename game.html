@@ -79,10 +79,12 @@
             var song_url = "https://api.spotify.com/v1/audio-features/" + song_id;
             $.ajax({
                 url: song_url,
+                headers: {
+                	'Authorization': 'Bearer ' + access_token
+                },
                 data: {
                     country: 'US'
                 },
-                Authorization: access_token,
                 success: function(response){
                     console.log(response);
                 },
