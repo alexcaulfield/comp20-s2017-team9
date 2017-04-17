@@ -22,7 +22,7 @@
 		});
 	</script>
 </head>
-<body onload="requestToken()">
+<body onload="requestToken(0)">
     <nav class="navbar navbar-default" role="navigation">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -50,16 +50,16 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="requestToken(), update_prev(1)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button></div>
 	<div id="song-preview1"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="requestToken(), update_prev(2)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="update_prev(2)" type="button"> pick this one</button></div>
 	<div id="song-preview2"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="requestToken(), update_prev(3)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="update_prev(3)" type="button"> pick this one</button></div>
 	<div id="song-preview3"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="requestToken(), update_prev(4)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="update_prev(4)" type="button"> pick this one</button></div>
 	<div id="song-preview4"></div></button>
 
 	<script type="text/javascript">
@@ -68,6 +68,7 @@
 	var audioObject = null;
 	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
 						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3", "3cfOd4CMv2snFaKAnMdnvK"];
+                         // in order: hoohah, general patton, jungle, donald trump, work from home, bom bom (radio), bom bom (instrumental), all star
 
 	var song1 = "";
     var song1_id = "";
@@ -80,36 +81,68 @@
     var access_token = '';
     var prev_song_id = '';
     var score = 0;
+    var song_features;
 
     function update_prev(num){
         if (num == 1){
-            //var song1_features = get_song_features(song1_id);
-            //var new_song_features = get_song_features(song)
             prev_song_id = song1_id;
+            requestToken(1);
         }else if (num ==2){
             prev_song_id = song2_id;
+            requestToken(2);
         }else if (num == 3){
             prev_song_id = song3_id;
+            requestToken(3);
         }else if (num == 4){
             prev_song_id = song4_id;
+            requestToken(4);
         }
 
-        console.log(prev_song_id);
+      //  console.log(prev_song_id);
     }
 
-		function requestToken(){
+		function requestToken(num){
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
                 access_token = data;
                 getSong(1, function(){
                     getSong(2, function(){
                         getSong(3, function(){
                             getSong(4, function(){
+                                if (prev_song_id != ''){
+                                    get_score(num);
+                                }
                             });
                         });
                     });
                 });
 			});
 		}
+
+        function get_score(num){
+            var new_song_id = '';
+
+            if (num == 1){
+                new_song_id = song1_id;
+            }else if (num == 2){
+                new_song_id = song2_id; //sets the new_song_id to the correct id value
+            }else if (num == 3){
+                new_song_id = song3_id;
+            }else if (num == 4){
+                new_song_id = song4_id;
+            }
+
+            console.log(prev_song_id);
+            console.log(new_song_id);
+
+            get_song_features(new_song_id);
+            var new_song_features = song_features; 
+            get_song_features(prev_song_id);            // doesn't work because fuck asynchronous javascript
+            var prev_song_features = song_features;
+
+            console.log(new_song_features);
+            console.log(prev_song_features);
+
+        }
 
         function get_song_features(song_id){
             var song_url = 'https://api.spotify.com/v1/audio-features/' + song_id;
@@ -123,10 +156,11 @@
                     country: 'US'
                 },
                 success: function(response){
-                    console.log(response);
+                    //console.log(response);
+                    song_features = response;
                 },
                 error: function(response){
-                    console.log ("ERROR with url: " + song_url + " and access token " + access_token);
+                   // console.log ("ERROR with url: " + song_url + " and access token " + access_token);
                 }
             })
         };
@@ -184,8 +218,8 @@
                 callback();
 			},
 			error: function (response) {
-			    console.log("ERROR: Track not found");
-			    console.log(song_url);
+			   // console.log("ERROR: Track not found");
+			   // console.log(song_url);
                 getSong(num);
                 callback();
 			}
