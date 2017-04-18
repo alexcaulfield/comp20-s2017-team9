@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <!-- Client ID: 6cf2ef39b7f7482c8b1bf8e82aa50d43 -->
@@ -220,10 +221,20 @@
 			error: function (response) {
 			   // console.log("ERROR: Track not found");
 			   // console.log(song_url);
+
+			   // do some sort of error handling - ming
+			   // probably do some sort of catch like this? http://stackoverflow.com/questions/2833951/how-to-catch-ajax-query-post-error
+			   //http://stackoverflow.com/questions/18864734/how-can-i-catch-jquery-ajax-errors
+			   //http://stackoverflow.com/questions/4062317/jquery-get-error-response-function\
+			   //function(XMLHttpRequest, textStatus, errorThrown) {
+				   //  alert(errorThrown);
+				 // }
                 getSong(num);
                 callback();
 			}
-		})
+		}).fail(function() {
+        console.log('fail', arguments);
+    });
 		};
 	</script>
 
