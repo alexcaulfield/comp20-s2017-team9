@@ -159,10 +159,7 @@
                             getSong(4, function(){
                                 if (newly_chosen_song_id != ''){
                                     get_song_features(newly_chosen_song_id);
-                                    newly_chosen_song_features = song_features;
-                                }
-                                if (prev_chosen_song_id != ''){
-                                    get_score(num);
+                                    //newly_chosen_song_features = song_features;
                                 }
                             });
                         });
@@ -172,7 +169,39 @@
 		}
 
         function get_score(num){
-            console.log("Got Score");
+            //console.log("Got Score");
+            //console.log(newly_chosen_song_features);
+
+            var new_adj_bpm = (newly_chosen_song_features.tempo)/200;
+            var prev_adj_bpm = (prev_chosen_song_features.tempo)/200;
+            //console.log("new_adj_bpm: " + new_adj_bpm);
+            //console.log("prev_adj_bpm: " + prev_adj_bpm);
+            //console.log("bpm score: " + .25*(1 - (new_adj_bpm - prev_adj_bpm)));
+
+            var new_energy = newly_chosen_song_features.energy;
+            var prev_energy = prev_chosen_song_features.energy;
+            //console.log("new_energy: " + new_energy);
+            //console.log("prev_energy: " + prev_energy);
+            //console.log("energy score: " + .25*(1 - (new_energy - prev_energy)));
+
+            var new_dance = newly_chosen_song_features.danceability;
+            var prev_dance = prev_chosen_song_features.danceability;
+            //console.log("new_dance: " + new_dance);
+            //console.log("prev_dance: " + prev_dance);
+            //console.log("dance score: " + .25*(1 - (new_dance - prev_dance)));
+
+            var new_val = newly_chosen_song_features.valence;
+            var prev_val = prev_chosen_song_features.valence;
+            //console.log("new_val: " + new_val);
+            //console.log("prev_val: " + prev_val);
+            //console.log("valence score: " + .25*(1 - (new_val - prev_val)));
+
+            var similarity = .25*(1 - (new_adj_bpm - prev_adj_bpm)) + .25*(1 - (new_energy - prev_energy)) + .25*(1 - (new_dance - prev_dance)) + .25*(1 - (new_val - prev_val));
+
+            //console.log("similarity: " + similarity);
+
+            score += similarity;
+            console.log("score: " + score);
         }
 
         function get_song_features(song_id){
@@ -190,9 +219,12 @@
                     newly_chosen_song_features = response;
 
                     console.log("new: " + newly_chosen_song_id);
-                    console.log(newly_chosen_song_features);
+                    //console.log(newly_chosen_song_features);
                     console.log("prev: " + prev_chosen_song_id);
-                    console.log(prev_chosen_song_features);
+                    //console.log(prev_chosen_song_features);
+                    if (prev_chosen_song_id != ''){
+                        get_score(0);
+                    }
                 },
                 error: function(response){
                     get_song_features(song_id);
