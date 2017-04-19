@@ -102,12 +102,14 @@
     var song_features;
     var newly_chosen_song_features;
     var prev_chosen_song_features;
+    var num_songs_on_playlist = 0;
 
     function getCurrentSong() {
     	//get the current song
     }
 
     function update_prev(num){
+        num_songs_on_playlist++;
         prev_chosen_song_id = newly_chosen_song_id;
         prev_chosen_song_features = newly_chosen_song_features;
 
@@ -199,9 +201,15 @@
             var similarity = .25*(1 - (new_adj_bpm - prev_adj_bpm)) + .25*(1 - (new_energy - prev_energy)) + .25*(1 - (new_dance - prev_dance)) + .25*(1 - (new_val - prev_val));
 
             //console.log("similarity: " + similarity);
-
+            similarity *= 100;
+            similarity = Math.round(similarity);
             score += similarity;
             console.log("score: " + score);
+
+            if (num_songs_on_playlist == 5){
+                window.alert("Your Score is: " + score);
+                window.location.replace("scoreboard.html");
+            }
         }
 
         function get_song_features(song_id){
