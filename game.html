@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <!-- Client ID: 6cf2ef39b7f7482c8b1bf8e82aa50d43 -->
@@ -7,13 +8,22 @@
 <html>
 <head>
 	<title>Game page</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<link rel ="stylesheet" href="bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 
+<!--	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('navbar-collapse').dropdown()
+		});
+	</script>
 </head>
-<body onload="requestToken()">
+<body onload="requestToken(0)">
     <nav class="navbar navbar-default" role="navigation">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -41,16 +51,16 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="getSong(1)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button></div>
 	<div id="song-preview1"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="getSong(2)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="update_prev(2)" type="button"> pick this one</button></div>
 	<div id="song-preview2"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="getSong(3)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="update_prev(3)" type="button"> pick this one</button></div>
 	<div id="song-preview3"></div></button><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="getSong(4)" type="button"> pick this one</button></div>
+	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="update_prev(4)" type="button"> pick this one</button></div>
 	<div id="song-preview4"></div></button>
 
 	<script type="text/javascript">
@@ -72,6 +82,7 @@
 	var audioObject = null;
 	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
 						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3", "3cfOd4CMv2snFaKAnMdnvK"];
+                         // in order: hoohah, general patton, jungle, donald trump, work from home, bom bom (radio), bom bom (instrumental), all star
 
 	var song1 = "";
     var song1_id = "";
@@ -82,16 +93,116 @@
 	var song4 = "";
     var song4_id = "";
     var access_token = '';
+    var prev_chosen_song_id = '';
+    var newly_chosen_song_id = '';
+    var score = 0;
+    var song_features;
+    var newly_chosen_song_features;
+    var prev_chosen_song_features;
 
-		function requestToken(){
+    function update_prev(num){
+        prev_chosen_song_id = newly_chosen_song_id;
+        prev_chosen_song_features = newly_chosen_song_features;
+
+        if (num == 1){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song1_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song1_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            requestToken(1);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }else if (num ==2){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song2_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song2_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            requestToken(2);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }else if (num == 3){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song3_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song3_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            console.log(meme_songs);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }else if (num == 4){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song4_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song4_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            console.log(meme_songs);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }
+    }
+
+		function requestToken(num){
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
                 access_token = data;
-                getSong(1);
-                getSong(2);
-                getSong(3);
-                getSong(4);
+                getSong(1, function(){
+                    getSong(2, function(){
+                        getSong(3, function(){
+                            getSong(4, function(){
+                                if (prev_chosen_song_id != ''){
+                                    get_score(num);
+                                }
+                            });
+                        });
+                    });
+                });
 			});
 		}
+
+        function get_score(num){
+            console.log("Got Score");
+            /*var new_song_id = '';
+
+            if (num == 1){
+                new_song_id = song1_id;
+            }else if (num == 2){
+                new_song_id = song2_id; //sets the new_song_id to the correct id value
+            }else if (num == 3){
+                new_song_id = song3_id;
+            }else if (num == 4){
+                new_song_id = song4_id;
+            }*/
+
+
+            /*console.log(new_song_id);
+            get_song_features(new_song_id);
+            new_song_features = song_features;
+            console.log(new_song_features);*/
+            /*console.log(prev_song_id);
+            console.log(new_song_id);
+
+            get_song_features(new_song_id);
+            var new_song_features = song_features; 
+            get_song_features(prev_song_id);            // doesn't work because fuck asynchronous javascript
+            var prev_song_features = song_features;
+
+            console.log(new_song_features);
+            console.log(prev_song_features);*/
+
+        }
 
         function get_song_features(song_id){
             var song_url = 'https://api.spotify.com/v1/audio-features/' + song_id;
@@ -106,19 +217,20 @@
                 },
                 success: function(response){
                     console.log(response);
+                    song_features = response;
                 },
                 error: function(response){
-                    console.log ("ERROR with url: " + song_url + " and access token " + access_token);
+                    get_song_features(song_id);
+                   // console.log ("ERROR with url: " + song_url + " and access token " + access_token);
                 }
             })
         };
 
-		function getSong(num) {
+		function getSong(num, callback) {
 
 			var song_url = "https://api.spotify.com/v1/tracks/";
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
-
 				song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%(meme_songs.length)];
 			}
 
@@ -140,32 +252,50 @@
 					songname1.innerHTML = response.name;
 					song1 = song_url;
                     song1_id = song1.replace("https://api.spotify.com/v1/tracks/","");
+                    song1 = song_url;
                     get_song_features(song1_id);
 				}
 				else if (num == 2){
 					songname2.innerHTML = response.name;
 					song2 = song_url;
                     song2_id = song2.replace("https://api.spotify.com/v1/tracks/","");
+                    song2 = song_url;
                     get_song_features(song2_id);
 				}
 				else if (num ==3){
 					songname3.innerHTML = response.name;
 					song3 = song_url;
                     song3_id = song3.replace("https://api.spotify.com/v1/tracks/","");
+                    song3 = song_url;
                     get_song_features(song3_id);
 				}
 				else if (num ==4){
 					songname4.innerHTML = response.name;
 					song4 = song_url;
                     song4_id = song4.replace("https://api.spotify.com/v1/tracks/","");
+                    song4 = song_url;
                     get_song_features(song4_id);
 				}
+                callback();
 			},
 			error: function (response) {
-			    console.log("ERROR: Track not found");
-			    console.log(song_url);
+			   // console.log("ERROR: Track not found");
+			   // console.log(song_url);
+
+			   // do some sort of error handling - ming
+			   // probably do some sort of catch like this? http://stackoverflow.com/questions/2833951/how-to-catch-ajax-query-post-error
+			   //http://stackoverflow.com/questions/18864734/how-can-i-catch-jquery-ajax-errors
+			   //http://stackoverflow.com/questions/4062317/jquery-get-error-response-function\
+			   //function(XMLHttpRequest, textStatus, errorThrown) {
+				   //  alert(errorThrown);
+				 // }
+                getSong(num);
+                callback();
 			}
-		})
+		}).fail(function() {
+        //console.log('fail', arguments);
+        console.log("fail");
+    });
 		};
 
 		function saveScore(username, score){
