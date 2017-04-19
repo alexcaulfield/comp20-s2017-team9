@@ -50,6 +50,9 @@
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
+
+	<button class="btn btn-default" type="button" onload="getCurrentSong()"><div id="currentSong">Current Song</div>
+	<div id="song-preview0"></div></button><br><br><br>
 	
 	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button></div>
 	<div id="song-preview1"></div></button><br><br><br>
@@ -67,7 +70,7 @@
 
 
 	//this is test code to get the score db running. dont worry about it. im working on it -AH
-	var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://ahanso01:Allball634@ds161190.mlab.com:61190/heroku_b3ks50c0';
+/*	var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://ahanso01:Allball634@ds161190.mlab.com:61190/heroku_b3ks50c0';
 	var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 	var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
 		if(error){
@@ -76,7 +79,7 @@
 			console.log("successfully connected to db")
 		}
 		db = databaseConnection;
-	});
+	});*/
 
 	var previewUrl;
 	var audioObject = null;
@@ -99,6 +102,10 @@
     var song_features;
     var newly_chosen_song_features;
     var prev_chosen_song_features;
+
+    function getCurrentSong() {
+    	//get the current song
+    }
 
     function update_prev(num){
         prev_chosen_song_id = newly_chosen_song_id;
