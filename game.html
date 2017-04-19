@@ -92,53 +92,41 @@
         prev_chosen_song_features = newly_chosen_song_features;
 
         if (num == 1){
+
             meme_songs = meme_songs.filter(function(el) {
-                return el !== song1_id;  // trying to remove songs from array when they are chosen
+                return el !== song1_id;  // removes songs from array when they are chosen
             })
+            
             newly_chosen_song_id = song1_id;
-            get_song_features(newly_chosen_song_id);
-            newly_chosen_song_features = song_features;
             requestToken(1);
-            console.log("new: " + newly_chosen_song_id);
-            console.log(newly_chosen_song_features);
-            console.log("prev: " + prev_chosen_song_id);
-            console.log(prev_chosen_song_features);
+
         }else if (num ==2){
+
             meme_songs = meme_songs.filter(function(el) {
-                return el !== song2_id;  // trying to remove songs from array when they are chosen
+                return el !== song2_id;  // removes songs from array when they are chosen
             })
+            
             newly_chosen_song_id = song2_id;
-            get_song_features(newly_chosen_song_id);
-            newly_chosen_song_features = song_features;
             requestToken(2);
-            console.log("new: " + newly_chosen_song_id);
-            console.log(newly_chosen_song_features);
-            console.log("prev: " + prev_chosen_song_id);
-            console.log(prev_chosen_song_features);
+
         }else if (num == 3){
+
             meme_songs = meme_songs.filter(function(el) {
-                return el !== song3_id;  // trying to remove songs from array when they are chosen
+                return el !== song3_id;  // removes songs from array when they are chosen
             })
+
             newly_chosen_song_id = song3_id;
-            get_song_features(newly_chosen_song_id);
-            newly_chosen_song_features = song_features;
-            console.log(meme_songs);
-            console.log("new: " + newly_chosen_song_id);
-            console.log(newly_chosen_song_features);
-            console.log("prev: " + prev_chosen_song_id);
-            console.log(prev_chosen_song_features);
+            requestToken(3);
+
         }else if (num == 4){
+
             meme_songs = meme_songs.filter(function(el) {
-                return el !== song4_id;  // trying to remove songs from array when they are chosen
+                return el !== song4_id;   // removes songs from array when they are chosen
             })
+
             newly_chosen_song_id = song4_id;
-            get_song_features(newly_chosen_song_id);
-            newly_chosen_song_features = song_features;
-            console.log(meme_songs);
-            console.log("new: " + newly_chosen_song_id);
-            console.log(newly_chosen_song_features);
-            console.log("prev: " + prev_chosen_song_id);
-            console.log(prev_chosen_song_features);
+            requestToken(4);
+            
         }
     }
 
@@ -149,6 +137,10 @@
                     getSong(2, function(){
                         getSong(3, function(){
                             getSong(4, function(){
+                                if (newly_chosen_song_id != ''){
+                                    get_song_features(newly_chosen_song_id);
+                                    newly_chosen_song_features = song_features;
+                                }
                                 if (prev_chosen_song_id != ''){
                                     get_score(num);
                                 }
@@ -161,34 +153,6 @@
 
         function get_score(num){
             console.log("Got Score");
-            /*var new_song_id = '';
-
-            if (num == 1){
-                new_song_id = song1_id;
-            }else if (num == 2){
-                new_song_id = song2_id; //sets the new_song_id to the correct id value
-            }else if (num == 3){
-                new_song_id = song3_id;
-            }else if (num == 4){
-                new_song_id = song4_id;
-            }*/
-
-
-            /*console.log(new_song_id);
-            get_song_features(new_song_id);
-            new_song_features = song_features;
-            console.log(new_song_features);*/
-            /*console.log(prev_song_id);
-            console.log(new_song_id);
-
-            get_song_features(new_song_id);
-            var new_song_features = song_features; 
-            get_song_features(prev_song_id);            // doesn't work because fuck asynchronous javascript
-            var prev_song_features = song_features;
-
-            console.log(new_song_features);
-            console.log(prev_song_features);*/
-
         }
 
         function get_song_features(song_id){
@@ -203,8 +167,12 @@
                     country: 'US'
                 },
                 success: function(response){
-                    console.log(response);
-                    song_features = response;
+                    newly_chosen_song_features = response;
+
+                    console.log("new: " + newly_chosen_song_id);
+                    console.log(newly_chosen_song_features);
+                    console.log("prev: " + prev_chosen_song_id);
+                    console.log(prev_chosen_song_features);
                 },
                 error: function(response){
                     get_song_features(song_id);
@@ -240,28 +208,24 @@
 					song1 = song_url;
                     song1_id = song1.replace("https://api.spotify.com/v1/tracks/","");
                     song1 = song_url;
-                    get_song_features(song1_id);
 				}
 				else if (num == 2){
 					songname2.innerHTML = response.name;
 					song2 = song_url;
                     song2_id = song2.replace("https://api.spotify.com/v1/tracks/","");
                     song2 = song_url;
-                    get_song_features(song2_id);
 				}
 				else if (num ==3){
 					songname3.innerHTML = response.name;
 					song3 = song_url;
                     song3_id = song3.replace("https://api.spotify.com/v1/tracks/","");
                     song3 = song_url;
-                    get_song_features(song3_id);
 				}
 				else if (num ==4){
 					songname4.innerHTML = response.name;
 					song4 = song_url;
                     song4_id = song4.replace("https://api.spotify.com/v1/tracks/","");
                     song4 = song_url;
-                    get_song_features(song4_id);
 				}
                 callback();
 			},
