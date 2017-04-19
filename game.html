@@ -80,26 +80,66 @@
 	var song4 = "";
     var song4_id = "";
     var access_token = '';
-    var prev_song_id = '';
+    var prev_chosen_song_id = '';
+    var newly_chosen_song_id = '';
     var score = 0;
     var song_features;
+    var newly_chosen_song_features;
+    var prev_chosen_song_features;
 
     function update_prev(num){
-        if (num == 1){
-            prev_song_id = song1_id;
-            requestToken(1);
-        }else if (num ==2){
-            prev_song_id = song2_id;
-            requestToken(2);
-        }else if (num == 3){
-            prev_song_id = song3_id;
-            requestToken(3);
-        }else if (num == 4){
-            prev_song_id = song4_id;
-            requestToken(4);
-        }
+        prev_chosen_song_id = newly_chosen_song_id;
+        prev_chosen_song_features = newly_chosen_song_features;
 
-      //  console.log(prev_song_id);
+        if (num == 1){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song1_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song1_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            requestToken(1);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }else if (num ==2){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song2_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song2_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            requestToken(2);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }else if (num == 3){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song3_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song3_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            console.log(meme_songs);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }else if (num == 4){
+            meme_songs = meme_songs.filter(function(el) {
+                return el !== song4_id;  // trying to remove songs from array when they are chosen
+            })
+            newly_chosen_song_id = song4_id;
+            get_song_features(newly_chosen_song_id);
+            newly_chosen_song_features = song_features;
+            console.log(meme_songs);
+            console.log("new: " + newly_chosen_song_id);
+            console.log(newly_chosen_song_features);
+            console.log("prev: " + prev_chosen_song_id);
+            console.log(prev_chosen_song_features);
+        }
     }
 
 		function requestToken(num){
@@ -109,7 +149,7 @@
                     getSong(2, function(){
                         getSong(3, function(){
                             getSong(4, function(){
-                                if (prev_song_id != ''){
+                                if (prev_chosen_song_id != ''){
                                     get_score(num);
                                 }
                             });
@@ -120,7 +160,8 @@
 		}
 
         function get_score(num){
-            var new_song_id = '';
+            console.log("Got Score");
+            /*var new_song_id = '';
 
             if (num == 1){
                 new_song_id = song1_id;
@@ -130,9 +171,14 @@
                 new_song_id = song3_id;
             }else if (num == 4){
                 new_song_id = song4_id;
-            }
+            }*/
 
-            console.log(prev_song_id);
+
+            /*console.log(new_song_id);
+            get_song_features(new_song_id);
+            new_song_features = song_features;
+            console.log(new_song_features);*/
+            /*console.log(prev_song_id);
             console.log(new_song_id);
 
             get_song_features(new_song_id);
@@ -141,7 +187,7 @@
             var prev_song_features = song_features;
 
             console.log(new_song_features);
-            console.log(prev_song_features);
+            console.log(prev_song_features);*/
 
         }
 
@@ -157,10 +203,11 @@
                     country: 'US'
                 },
                 success: function(response){
-                    //console.log(response);
+                    console.log(response);
                     song_features = response;
                 },
                 error: function(response){
+                    get_song_features(song_id);
                    // console.log ("ERROR with url: " + song_url + " and access token " + access_token);
                 }
             })
@@ -233,7 +280,8 @@
                 callback();
 			}
 		}).fail(function() {
-        console.log('fail', arguments);
+        //console.log('fail', arguments);
+        console.log("fail");
     });
 		};
 	</script>
