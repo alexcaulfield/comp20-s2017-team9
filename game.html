@@ -65,6 +65,19 @@
 
 	<script type="text/javascript">
 
+
+	//this is test code to get the score db running. dont worry about it. im working on it -AH
+	var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://ahanso01:Allball634@ds161190.mlab.com:61190/heroku_b3ks50c0';
+	var MongoClient = require('mongodb').MongoClient, format = require('util').format;
+	var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
+		if(error){
+			console.log("error"+ error)
+		} else {
+			console.log("successfully connected to db")
+		}
+		db = databaseConnection;
+	});
+
 	var previewUrl;
 	var audioObject = null;
 	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
@@ -248,6 +261,11 @@
         console.log("fail");
     });
 		};
+
+		function saveScore(username, score){
+			db.scores.insert({"username":username, "score":score});
+			console.log("Username: "+username+"inserted in db with score: "+score);
+		}
 	</script>
 
 </body>
