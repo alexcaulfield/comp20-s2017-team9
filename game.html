@@ -105,8 +105,7 @@
     var num_songs_on_playlist = 0;
 
     function getCurrentSong() {
-        console.log("Here");
-    	//if (prev_chosen_song_id != '') {
+    	if (newly_chosen_song_id != '') {
             songUrl = "https://api.spotify.com/v1/tracks/";
             songUrl += newly_chosen_song_id;
             var trackPreview = document.getElementById('song-preview0');
@@ -126,7 +125,9 @@
                 alert("ERROR");
             }
             })
-        //}
+        } else {
+            getSong(0);
+        }
     }
 
     function update_prev(num){
@@ -286,6 +287,10 @@
 				previewUrl = response.preview_url;
 				audioObject = new Audio(); 
 				previewTrack.innerHTML = '<audio id="audio-player" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+                if (num == 0){
+                    var songTitle = document.getElementById('currentSong');
+                    songTitle.innerHTML = response.name;
+                }
 				if (num == 1){
 					songname1.innerHTML = response.name;
 					song1 = song_url;
