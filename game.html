@@ -51,7 +51,7 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<button class="btn btn-default" type="button" onload="getCurrentSong()"><div id="currentSong">Current Song</div>
+	<button class="btn btn-default" type="button"><div id="currentSong">Current Song</div>
 	<div id="song-preview0"></div></button><br><br><br>
 	
 	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button></div>
@@ -105,7 +105,28 @@
     var num_songs_on_playlist = 0;
 
     function getCurrentSong() {
-    	//get the current song
+        console.log("Here");
+    	//if (prev_chosen_song_id != '') {
+            songUrl = "https://api.spotify.com/v1/tracks/";
+            songUrl += newly_chosen_song_id;
+            var trackPreview = document.getElementById('song-preview0');
+            var songTitle = document.getElementById('currentSong');
+
+            $.ajax({
+                url: songUrl,
+                data: {
+                    country: 'US'
+                },
+            success: function (response) {
+                audioObject = new Audio(); 
+                trackPreview.innerHTML = '<audio id="audio-player" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+                songTitle.innerHTML = response.name;            
+            },
+            error: function (response) {
+                alert("ERROR");
+            }
+            })
+        //}
     }
 
     function update_prev(num){
@@ -231,6 +252,7 @@
                     //console.log(newly_chosen_song_features);
                     console.log("prev: " + prev_chosen_song_id);
                     //console.log(prev_chosen_song_features);
+                    getCurrentSong(); // IS THIS THE RIGHT PLACE TO PUT THIS?
                     if (prev_chosen_song_id != ''){
                         get_score(0);
                     }
