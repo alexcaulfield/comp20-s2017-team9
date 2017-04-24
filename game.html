@@ -23,7 +23,7 @@
 		});
 	</script>
 </head>
-<body onload="getCurrentSong()">
+<body onload="getPlaylist()">
     <nav class="navbar navbar-default" role="navigation">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -68,7 +68,6 @@
 
 	<script type="text/javascript">
 
-
 	//this is test code to get the score db running. dont worry about it. im working on it -AH
 /*	var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://ahanso01:Allball634@ds161190.mlab.com:61190/heroku_b3ks50c0';
 	var MongoClient = require('mongodb').MongoClient, format = require('util').format;
@@ -103,6 +102,39 @@
     var newly_chosen_song_features;
     var prev_chosen_song_features;
     var num_songs_on_playlist = 1;
+    var EDMsongs = [];
+
+    function getPlaylist() {
+        // playlist URI: 3pK4cYF269adFRsBnEpkqy
+        // user ID: cauf
+        playlistUrl = 'https://api.spotify.com/v1/users/cauf/playlists/3pK4cYF269adFRsBnEpkqy' // EDM playlist
+        $.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
+            accessToken = data;
+
+            $.ajax({
+                url: playlistUrl,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                data: {
+                    country: 'US',
+                    fields: 'tracks.items(track(id))'
+                },
+                success: function (response) {
+                    //console.log(response);
+                    for (var i = 0; i < response.tracks.items.length; i++) {
+                        EDMsongs[i] = response.tracks.items[i].track.id;
+                    }
+                    //console.log(EDMsongs);
+                    getCurrentSong();
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        })    
+    }
 
     function getCurrentSong() {
     	if (newly_chosen_song_id != '') {
@@ -246,7 +278,6 @@
         };
 
 		function getSong(num, callback) {
-
 			var song_url = "https://api.spotify.com/v1/tracks/";
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
