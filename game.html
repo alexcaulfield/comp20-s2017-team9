@@ -82,8 +82,8 @@
 
 	var previewUrl;
 	var audioObject = null;
-	var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
-						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3", "3cfOd4CMv2snFaKAnMdnvK", "3XWZ7PNB3ei50bTPzHhqA6", "5vIu19A3EEdHgFM4Cba6F4", "17tDv8WA8IhqE8qzuQn707", "4srpHYFHKjVGRDNHqRpWxi", "5Q0Nhxo0l2bP3pNjpGJwV1"];
+	//var meme_songs = ["6snnRz6kK978tSyUdejEyg", "4z6uwQKPhhIOOFCeiftv3J", "3xgK660fsZH7ZDcOMfIdfB", "0gfmYDvAZxOl6jXk1N9Fwy",   
+//						 "4tCtwWceOPWzenK2HAIJSb", "0d5f6gzzW1Pgx9uJsLrSDP", "6umBH7xHLEU9RVhH4mpXQ3", "3cfOd4CMv2snFaKAnMdnvK", "3XWZ7PNB3ei50bTPzHhqA6", "5vIu19A3EEdHgFM4Cba6F4", "17tDv8WA8IhqE8qzuQn707", "4srpHYFHKjVGRDNHqRpWxi", "5Q0Nhxo0l2bP3pNjpGJwV1"];
                          // in order: hoohah, general patton, jungle, donald trump, work from home, bom bom (radio), bom bom (instrumental), all star, sandstorm, choices, my first kiss, TiK ToK, party in the USA
 
 	var song1 = "";
@@ -138,7 +138,7 @@
 
     function getCurrentSong() {
     	if (newly_chosen_song_id != '') {
-            meme_songs = meme_songs.filter(function(el) {
+            EDMsongs = EDMsongs.filter(function(el) {
                 return el !== newly_chosen_song_id;  // removes songs from array when they are chosen
             });
 
@@ -187,7 +187,7 @@
     }
 
 		function requestToken(num){
-            console.log(meme_songs);
+            console.log(EDMsongs);
             getCurrentSong(); // IS THIS THE RIGHT PLACE TO PUT THIS?
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
                 access_token = data;
@@ -281,7 +281,7 @@
 			var song_url = "https://api.spotify.com/v1/tracks/";
 			while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 					(song_url == song3) || (song_url == song4)){
-				song_url += meme_songs[(Math.floor((Math.random() * 100) + 1))%(meme_songs.length)];
+				song_url += EDMsongs[(Math.floor((Math.random() * 100) + 1))%(EDMsongs.length)];
 			}
 
 			var pre_track = 'song-preview';
@@ -301,7 +301,7 @@
                 if (num == 0){
                     var songTitle = document.getElementById('currentSong');
                     songTitle.innerHTML = response.name;
-                    meme_songs = meme_songs.filter(function(el) {
+                    EDMsongs = EDMsongs.filter(function(el) {
                         return el !== response.id;  // removes songs from array when they are chosen
                     });
                     newly_chosen_song_id = response.id;
