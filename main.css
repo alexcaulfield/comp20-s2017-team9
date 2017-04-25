@@ -154,14 +154,14 @@ img {
 .score{
     background-color: lightgrey;
     text-decoration-color: white;
-    text-align: center;
+    text-align: left;
 }
 
 .indent{
-    padding-left: 45%;
-    padding-right: 45%;
+    padding-left: 47%;
+    padding-right: 47%;
 }
 
 #score:hover{
-    background-color: grey;
+    background-color: #87CEFA;
 }

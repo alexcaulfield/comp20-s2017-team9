@@ -104,10 +104,11 @@
     </div>
 
     <div class="page_split_3"></div>
-
-    <div class="indent">
-        <div class="score" id="score">Score: 0</div>
-    </div>
+    <nobr>
+        <div class="indent">
+            <div class="score" id="score">Score: 0</div>
+        </div>
+    </nobr>
 
 	<script type="text/javascript">
 
@@ -309,7 +310,7 @@
 
             elem = document.getElementById("score");
             elem.innerHTML = "Score: " + score;
-            
+
             if (num_songs_on_playlist == 5){
                 window.alert("Your Score is: " + score);
                 // add score into database
