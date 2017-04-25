@@ -151,6 +151,9 @@ h2 {
     clear:both;
 }
 
+.album_art {
+    float:left;
+}
 .score{
     background-color: lightgrey;
     text-decoration-color: white;
