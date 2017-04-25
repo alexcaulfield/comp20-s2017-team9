@@ -106,7 +106,23 @@ img {
 }
 
 .game_background {
-    background-image: url(http://www.pixelstalk.net/wp-content/uploads/2016/06/DJ-Wallpaper-Image-Background-Computers.jpg);
+    background-image: url(dj.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
+}
+
+#picked1:hover {
+    background-color: #FF8C00;
+}
+
+#picked2:hover {
+    background-color: #FF8C00;
+}
+
+#picked3:hover {
+    background-color: #FF8C00;
+}
+
+#picked4:hover {
+    background-color: #FF8C00;
 }
