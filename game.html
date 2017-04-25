@@ -51,8 +51,12 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<button class="btn btn-default current-btn" type="button"><div id="currentSong">Current Song</div>
-	<div id="song-preview0"></div></button><br><br><br>
+	<button class="btn btn-default current-btn" type="button" onclick="meme_alert()">
+        <div id="currentSong">Current Song</div>
+	    <div id="song-preview0"></div>
+    </button>
+
+    <br><br><br>
 
     <div class="page_split">
         <div class="page_split_1">	
@@ -141,6 +145,14 @@
     var num_songs_on_playlist = 1;
     var EDMsongs = [];
 
+    function meme_alert() {
+        if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){
+            window.alert("I know we all want to party to All Star on repeat, but you gotta pick something else");
+        } else{
+            window.alert("HA GOTEEEEEEEEEEEM");
+        }
+    }
+
     function getPlaylist() {
         // playlist URI: 3pK4cYF269adFRsBnEpkqy
         // user ID: cauf
@@ -210,15 +222,27 @@
 
         if (num == 1){ 
             newly_chosen_song_id = song1_id;
+            if (song1_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(1);
         } else if (num ==2){
             newly_chosen_song_id = song2_id;
+            if (song2_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(2);
         } else if (num == 3){
             newly_chosen_song_id = song3_id;
+            if (song3_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(3);
         } else if (num == 4){
             newly_chosen_song_id = song4_id;
+            if (song4_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(4);  
         }
     }
@@ -396,6 +420,7 @@
 			db.scores.insert({"username":username, "score":score});
 			console.log("Username: "+username+"inserted in db with score: "+score);
 		}
+
 	</script>
 
 </body>
