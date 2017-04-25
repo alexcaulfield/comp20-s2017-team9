@@ -55,7 +55,7 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<img src="http://www.vanyaland.com/wp-content/uploads/2014/02/HouseOfBluesBostonMA.jpg" alt="House of Blues Boston">
+	<img id="venue" src="http://www.vanyaland.com/wp-content/uploads/2014/02/HouseOfBluesBostonMA.jpg" alt="House of Blues Boston">
 
 	<div class="container">
 	  <h2>Global Leaders</h2>          
@@ -86,6 +86,31 @@
 	    </tbody>
 	  </table>
 	</div>
+	<script type="text/javascript">
+		navigator.geolocation.getCurrentPosition(function(position) {
+				lat = position.coords.latitude;
+				lng = position.coords.longitude;
+				if (lat > 39 && lng < -98) {
+					document.getElementById("venue").src="https://s-media-cache-ak0.pinimg.com/originals/c0/0e/38/c00e388150a7e83a89a146d9ca6c4f46.jpg";
+					document.getElementById("venue").alt="Gorge Ampitheatre";
 
+				}
+				if (lat < 39 && lng < -98) {
+					document.getElementById("venue").src="http://images.ticketofficesales.com/venues/182.jpg";
+					document.getElementById("venue").alt="Bill Graham Auditorium";
+				}
+				if (lat > 39 && lng > -98) {
+					document.getElementById("venue").src="http://www.vanyaland.com/wp-content/uploads/2014/02/HouseOfBluesBostonMA.jpg";
+					document.getElementById("venue").alt="House of Blues";
+				}
+				if (lat < 39 && lng > -98) {
+					document.getElementById("venue").src="http://www.miamiherald.com/news/local/community/miami-dade/pw07nn/picture9711830/alternates/FREE_640/ultrahorizontal.JPG";
+					document.getElementById("venue").alt="Ultra Miami";
+				}
+			
+		});
+
+
+	</script>
 </body>
 </html>
