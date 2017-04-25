@@ -50,6 +50,8 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
+    <img id="current album art"> 
+
 	<button class="btn btn-default current-btn" type="button"><div id="currentSong">Current Song</div>
 	<div id="song-preview0"></div></button><br><br><br>
 
@@ -191,7 +193,8 @@
             success: function (response) {
                 audioObject = new Audio(); 
                 trackPreview.innerHTML = response.artists[0].name + '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
-                songTitle.innerHTML = response.name;            
+                songTitle.innerHTML = response.name;   
+                document.getElementById("current album art").src=response.album.images[2].url;              
             },
             error: function (response) {
                 alert("ERROR");
