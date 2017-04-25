@@ -150,3 +150,18 @@ img {
 .page_split_3 {
     clear:both;
 }
+
+.score{
+    background-color: lightgrey;
+    text-decoration-color: white;
+    text-align: center;
+}
+
+.indent{
+    padding-left: 45%;
+    padding-right: 45%;
+}
+
+#score:hover{
+    background-color: grey;
+}
