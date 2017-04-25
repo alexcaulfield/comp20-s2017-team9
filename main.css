@@ -130,3 +130,21 @@ img {
 #picked4:hover {
     background-color: #87CEFA;
 }
+
+.page_split {
+    width: 100%;
+}
+
+.page_split_1 {
+    width: 50%;
+    float: left;
+}
+
+.page_split_2 {
+    float: right;
+    width: 50%;
+}
+
+.page_split_3 {
+    clear:both;
+}
