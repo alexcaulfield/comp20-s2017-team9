@@ -271,7 +271,7 @@
             //console.log("prev_val: " + prev_val);
             //console.log("valence score: " + .25*(1 - (new_val - prev_val)));
 
-            var similarity = .25*(1 - (new_adj_bpm - prev_adj_bpm)) + .25*(1 - (new_energy - prev_energy)) + .25*(1 - (new_dance - prev_dance)) + .25*(1 - (new_val - prev_val));
+            var similarity = .25*(1 - Math.abs(new_adj_bpm - prev_adj_bpm)) + .25*(1 - Math.abs(new_energy - prev_energy)) + .25*(1 - Math.abs(new_dance - prev_dance)) + .25*(1 - Math.abs(new_val - prev_val));
 
             //console.log("similarity: " + similarity);
             similarity *= 100;
