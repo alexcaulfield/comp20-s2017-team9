@@ -14,6 +14,16 @@
 
 @media (min-width:600px){
     .navbar-left {
+        padding-left: 0%;
+    }
+
+    .navbar-right {
+        padding-right: 0%;
+    }
+}
+
+@media (min-width:770px){
+    .navbar-left {
         padding-left: 15%;
     }
 
@@ -49,7 +59,7 @@ h2 {
 img {
 	width: 100%;
 	height: 100%;
-	max-height: 300px;
+	max-height: 500px;
 	object-fit: cover;
 	overflow: hidden;
 	display: block;
@@ -73,6 +83,52 @@ img {
 .bold {
     font-weight: bold;
 }
+<<<<<<< HEAD
 #formula-note{
     font-size: .5em;
 }
+=======
+
+.current-btn {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.song-btn {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;    
+}
+
+.song-audio {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;    
+}
+
+.game_background {
+    background-image: url(dj.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#picked1:hover {
+    background-color: #FF8C00;
+}
+
+#picked2:hover {
+    background-color: #FF8C00;
+}
+
+#picked3:hover {
+    background-color: #FF8C00;
+}
+
+#picked4:hover {
+    background-color: #FF8C00;
+}
+>>>>>>> c5453d2595eaf6150cd341b13fe412237c1b799b
