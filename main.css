@@ -83,6 +83,11 @@ img {
 .bold {
     font-weight: bold;
 }
+<<<<<<< HEAD
+#formula-note{
+    font-size: .5em;
+}
+=======
 
 .current-btn {
     float: none;
@@ -126,3 +131,4 @@ img {
 #picked4:hover {
     background-color: #87CEFA;
 }
+>>>>>>> c5453d2595eaf6150cd341b13fe412237c1b799b
