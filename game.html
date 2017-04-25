@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <!-- Client ID: 6cf2ef39b7f7482c8b1bf8e82aa50d43 -->
@@ -7,7 +6,7 @@
 
 <html>
 <head>
-	<title>Game page</title>
+	<title>Game</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -54,26 +53,53 @@
 	<button class="btn btn-default current-btn" type="button"><div id="currentSong">Current Song</div>
 	<div id="song-preview0"></div></button><br><br><br>
 
-<div style="width: 100%;">
-<div style="float:left; width:50%">	
-	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname1">Song 1</div>
-	<div id="song-preview1"></div><button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button></button></div>
+    <div style="width: 100%;">
+        <div style="float:left; width:50%">	
+	       <div class="song-btn">
+                <button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)">
+                    <div id="songname1">Song 1</div>
+	                <div id="song-preview1"></div>
+                    <!--<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button>-->
+                </button>
+            </div>
 
-    <br><br>
+            <br><br>
 
-	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname2">Song 2</div>
-	<div id="song-preview2"></div><button class="btn btn-default" id="picked2" onclick="update_prev(2)" type="button"> pick this one</button></button></div><br><br><br>
-</div>
-<div style="float:right; width:50%">
-	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname3">Song 3</div>
-	<div id="song-preview3"></div><button class="btn btn-default" id="picked3" onclick="update_prev(3)" type="button"> pick this one</button></button></div>
+	        <div class="song-btn">
+                <button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)">
+                    <div id="songname2">Song 2</div>
+	                <div id="song-preview2"></div>
+                    <!--<button class="btn btn-default" type="button"> pick this one</button>-->
+                </button>
+            </div>
 
-    <br><br>
+            <br><br><br>
 
-	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname4">Song 4</div>
-	<div id="song-preview4"></div><button class="btn btn-default" id="picked4" onclick="update_prev(4)" type="button"> pick this one</button></button></div>
-</div></div>
-<div style="clear:both"></div>
+        </div>
+
+        <div style="float:right; width:50%">
+	       <div class="song-btn">
+                <button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)">
+                    <div id="songname3">Song 3</div>
+	                <div id="song-preview3"></div>
+                    <!--<button class="btn btn-default" type="button"> pick this one</button>-->
+                </button>
+            </div>
+
+            <br><br>
+
+	        <div class="song-btn">
+                <button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)">
+                    <div id="songname4">Song 4</div>
+	                <div id="song-preview4"></div>
+                    <!--<button class="btn btn-default" type="button"> pick this one</button>-->
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div style="clear:both"></div>
+
 	<script type="text/javascript">
 
 	//this is test code to get the score db running. dont worry about it. im working on it -AH
@@ -164,7 +190,7 @@
                 },
             success: function (response) {
                 audioObject = new Audio(); 
-                trackPreview.innerHTML = '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+                trackPreview.innerHTML = response.artists[0].name + '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
                 songTitle.innerHTML = response.name;            
             },
             error: function (response) {
@@ -197,7 +223,7 @@
     }
 
 		function requestToken(num){
-            console.log(EDMsongs);
+            //console.log(EDMsongs);
             getCurrentSong(); // IS THIS THE RIGHT PLACE TO PUT THIS?
 			$.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
                 access_token = data;
@@ -250,7 +276,7 @@
             similarity *= 100;
             similarity = Math.round(similarity);
             score += similarity;
-            console.log("score: " + score);
+            //console.log("score: " + score);
 
             if (num_songs_on_playlist == 5){
                 window.alert("Your Score is: " + score);
@@ -272,9 +298,9 @@
                 },
                 success: function(response){
                     newly_chosen_song_features = response;
-                    console.log("new: " + newly_chosen_song_id);
+                    //console.log("new: " + newly_chosen_song_id);
                     //console.log(newly_chosen_song_features);
-                    console.log("prev: " + prev_chosen_song_id);
+                    //console.log("prev: " + prev_chosen_song_id);
                     //console.log(prev_chosen_song_features);
                     if (prev_chosen_song_id != ''){
                         get_score(0);
@@ -307,7 +333,8 @@
 			success: function (response) {
 				previewUrl = response.preview_url;
 				audioObject = new Audio(); 
-				previewTrack.innerHTML = '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+				previewTrack.innerHTML = response.artists[0].name + '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' + response.preview_url  + '" type="audio/mpeg"></audio>';
+
                 if (num == 0){
                     var songTitle = document.getElementById('currentSong');
                     songTitle.innerHTML = response.name;
