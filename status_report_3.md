@@ -9,3 +9,6 @@ Callback functions and bad request errors have plagued our process of getting in
 
 Goals for next week:
 Connect the scoring to a database so that users can post their username and scores from the game. Secondly, we would like to connect our game to a spotify playlist with significantly more songs on it, and ones of similar genre so that scores could be better and gameplay would improve with a variety of songs. We also are looking to clean up the appearence and design of the game to make it look user friendly.
+
+# Comments by Ming
+* "We would like to build a template for the game page so that the songs can be populated easily during gameplay and make the transitions between current songs seamless." => was this done?
