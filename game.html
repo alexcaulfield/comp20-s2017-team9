@@ -23,7 +23,7 @@
 		});
 	</script>
 </head>
-<body onload="getPlaylist()">
+<body onload="getPlaylist()" class="game_background">
     <nav class="navbar navbar-default" role="navigation">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,20 +51,20 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<button class="btn btn-default" type="button"><div id="currentSong">Current Song</div>
+	<button class="btn btn-default current-btn" type="button"><div id="currentSong">Current Song</div>
 	<div id="song-preview0"></div></button><br><br><br>
 	
-	<button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button></div>
-	<div id="song-preview1"></div></button><br><br><br>
+	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname1">Song 1<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button></div>
+	<div id="song-preview1"></div></button></div>
 
-	<button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="update_prev(2)" type="button"> pick this one</button></div>
-	<div id="song-preview2"></div></button><br><br><br>
+	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname2">Song 2<button class="btn btn-default" id="picked2" onclick="update_prev(2)" type="button"> pick this one</button></div>
+	<div id="song-preview2"></div></button></div><br><br><br>
 
-	<button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="update_prev(3)" type="button"> pick this one</button></div>
-	<div id="song-preview3"></div></button><br><br><br>
+	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname3">Song 3<button class="btn btn-default" id="picked3" onclick="update_prev(3)" type="button"> pick this one</button></div>
+	<div id="song-preview3"></div></button></div>
 
-	<button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="update_prev(4)" type="button"> pick this one</button></div>
-	<div id="song-preview4"></div></button>
+	<div class="song-btn"><button class="btn btn-default" type="button"><div id="songname4">Song 4<button class="btn btn-default" id="picked4" onclick="update_prev(4)" type="button"> pick this one</button></div>
+	<div id="song-preview4"></div></button></div>
 
 	<script type="text/javascript">
 
@@ -79,6 +79,8 @@
 		}
 		db = databaseConnection;
 	});*/
+
+    // how to make one audio file play at once html
 
 	var previewUrl;
 	var audioObject = null;
@@ -154,7 +156,7 @@
                 },
             success: function (response) {
                 audioObject = new Audio(); 
-                trackPreview.innerHTML = '<audio id="audio-player" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+                trackPreview.innerHTML = '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
                 songTitle.innerHTML = response.name;            
             },
             error: function (response) {
@@ -297,7 +299,7 @@
 			success: function (response) {
 				previewUrl = response.preview_url;
 				audioObject = new Audio(); 
-				previewTrack.innerHTML = '<audio id="audio-player" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
+				previewTrack.innerHTML = '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' +response.preview_url  + '" type="audio/mpeg">';
                 if (num == 0){
                     var songTitle = document.getElementById('currentSong');
                     songTitle.innerHTML = response.name;
