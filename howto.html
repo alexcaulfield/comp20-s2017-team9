@@ -49,8 +49,8 @@
 	<div class="center"><h1>How To Play</h1></div>
 	<div class="explanations">
 		<div class="buffer"><p>
-		Welcome to PopQuiz, a fun and interactive music quiz game. The idea of this game is to listen to a song snippet and choose from a multiple choice list of songs, picking the one that relates to the current song most. <br><br>
-		Song similarity is evaluated based on the following four features (descriptions copied from the Spotify API):
+		Welcome to So You Think You Can DJ, a fun and interactive music quiz game. The idea of this game is to listen to a song snippet and choose from a multiple choice list of songs, picking the one that relates to the current song most. <br><br>
+		Song similarity is evaluated based on the following four features, as described by the Spotify API:
 		<br><br>
 		<div class= "bold">Tempo</div> - The overall estimated tempo of a track in beats per minute (BPM).
 		<br><br>
@@ -60,8 +60,16 @@
 		<br><br>
 		<div class= "bold">Valence</div> - The musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
 		<br><br>
-		blah blah blah explaining the game blah blah blah
+		Your score for each song selection is computed from the following formula:
+		<blockquote>similarity = <br>.25(1 - difference in adjusted BPM) + <br>.25(1 - difference in energy) + <br>.25(1 - difference in danceability) + <br>.25(1 - difference in valence)</blockquote>
+		<div id="formula-note">*adjusted BPM = BPM/200</div>
+		<br>
+		Your final score is a total of the scores of your song selections over the course of your DJ set.  
+		<br>
+		<br>
+		You have a total of four songs for your DJ set. Now step up on stage and rock this crowd.
 		</p></div>
+		<img src="https://www.djmastercourse.com/wp-content/uploads/2014/06/dj-training.png" alt="excited fans" />
 	</div>
 
 </body>

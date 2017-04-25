@@ -90,8 +90,6 @@
 		navigator.geolocation.getCurrentPosition(function(position) {
 				lat = position.coords.latitude;
 				lng = position.coords.longitude;
-				console.log(lat);
-				console.log(lng);
 				if (lat > 39 && lng < -98) {
 					document.getElementById("venue").src="https://s-media-cache-ak0.pinimg.com/originals/c0/0e/38/c00e388150a7e83a89a146d9ca6c4f46.jpg";
 					document.getElementById("venue").alt="Gorge Ampitheatre";
@@ -111,6 +109,7 @@
 				}
 				if (lat > 42.403 && lat < 42.404 && lng < -71.116 && lng > -71.117) {
 					document.getElementById("venue").src="https://scontent.fphl1-1.fna.fbcdn.net/v/t31.0-8/12363027_1165824993447492_8236582952456818659_o.jpg?oh=dfd5bc9cbd3ad83d703b401935f7cd72&oe=59979F76";
+					document.getElementById("venue").alt="DJ trac featuring yung T";
 				}
 			
 		});
