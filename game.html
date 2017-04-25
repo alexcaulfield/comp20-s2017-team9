@@ -12,6 +12,7 @@
 
 	<link rel ="stylesheet" href="bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
 
 <!--	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
@@ -52,11 +53,15 @@
 
     <img id="current album art"> 
 
-	<button class="btn btn-default current-btn" type="button"><div id="currentSong">Current Song</div>
-	<div id="song-preview0"></div></button><br><br><br>
+	<button class="btn btn-default current-btn" type="button" onclick="meme_alert()">
+        <div id="currentSong">Current Song</div>
+	    <div id="song-preview0"></div>
+    </button>
 
-    <div style="width: 100%;">
-        <div style="float:left; width:50%">	
+    <br><br><br>
+
+    <div class="page_split">
+        <div class="page_split_1">	
 	       <div class="song-btn">
                 <button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)">
                     <div id="songname1">Song 1</div>
@@ -79,7 +84,7 @@
 
         </div>
 
-        <div style="float:right; width:50%">
+        <div class="page_split_2">
 	       <div class="song-btn">
                 <button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)">
                     <div id="songname3">Song 3</div>
@@ -100,7 +105,11 @@
         </div>
     </div>
 
-    <div style="clear:both"></div>
+    <div class="page_split_3"></div>
+
+    <div class="indent">
+        <div class="score" id="score">Score: 0</div>
+    </div>
 
 	<script type="text/javascript">
 
@@ -141,6 +150,14 @@
     var prev_chosen_song_features;
     var num_songs_on_playlist = 1;
     var EDMsongs = [];
+
+    function meme_alert() {
+        if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){
+            window.alert("I know we all want to party to All Star on repeat, but you gotta pick something else");
+        } else{
+            window.alert("HA GOTEEEEEEEEEEEM");
+        }
+    }
 
     function getPlaylist() {
         // playlist URI: 3pK4cYF269adFRsBnEpkqy
@@ -212,15 +229,27 @@
 
         if (num == 1){ 
             newly_chosen_song_id = song1_id;
+            if (song1_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(1);
         } else if (num ==2){
             newly_chosen_song_id = song2_id;
+            if (song2_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(2);
         } else if (num == 3){
             newly_chosen_song_id = song3_id;
+            if (song3_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(3);
         } else if (num == 4){
             newly_chosen_song_id = song4_id;
+            if (song4_id == "3cfOd4CMv2snFaKAnMdnvK"){
+                window.alert("Good Answer! Good Answer!");
+            }
             requestToken(4);  
         }
     }
@@ -273,7 +302,7 @@
             //console.log("prev_val: " + prev_val);
             //console.log("valence score: " + .25*(1 - (new_val - prev_val)));
 
-            var similarity = .25*(1 - (new_adj_bpm - prev_adj_bpm)) + .25*(1 - (new_energy - prev_energy)) + .25*(1 - (new_dance - prev_dance)) + .25*(1 - (new_val - prev_val));
+            var similarity = .25*(1 - Math.abs(new_adj_bpm - prev_adj_bpm)) + .25*(1 - Math.abs(new_energy - prev_energy)) + .25*(1 - Math.abs(new_dance - prev_dance)) + .25*(1 - Math.abs(new_val - prev_val));
 
             //console.log("similarity: " + similarity);
             similarity *= 100;
@@ -281,11 +310,14 @@
             score += similarity;
             //console.log("score: " + score);
 
+            elem = document.getElementById("score");
+            elem.innerHTML = "Score: " + score;
+            
             if (num_songs_on_playlist == 5){
                 window.alert("Your Score is: " + score);
                 // add score into database
                 window.location.replace("scoreboard.html");
-            }
+            } 
         }
 
         function get_song_features(song_id){
@@ -398,6 +430,7 @@
 			db.scores.insert({"username":username, "score":score});
 			console.log("Username: "+username+"inserted in db with score: "+score);
 		}
+
 	</script>
 
 </body>

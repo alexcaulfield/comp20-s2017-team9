@@ -130,3 +130,38 @@ h2 {
 #picked4:hover {
     background-color: #87CEFA;
 }
+
+.page_split {
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 100%;
+}
+
+.page_split_1 {
+    width: 50%;
+    float: left;
+}
+
+.page_split_2 {
+    float: right;
+    width: 50%;
+}
+
+.page_split_3 {
+    clear:both;
+}
+
+.score{
+    background-color: lightgrey;
+    text-decoration-color: white;
+    text-align: center;
+}
+
+.indent{
+    padding-left: 45%;
+    padding-right: 45%;
+}
+
+#score:hover{
+    background-color: grey;
+}
