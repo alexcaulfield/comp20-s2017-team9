@@ -23,7 +23,7 @@
 		});
 	</script>
 </head>
-<body onload="getPlaylist()" class="game_background">
+<body class="game_background">
     <nav class="navbar navbar-default" role="navigation">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,84 +51,14 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<button class="btn btn-default current-btn" type="button" onclick="meme_alert()">
-        <div class="album_art">
-            <img id="current album art">
-        </div> 
-        <div id="currentSong">Current Song</div>
-	    <div id="song-preview0"></div>
-    </button>
+<div id="genre">
 
-    <br><br><br>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Rock')">Rock</button>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('EDM')">EDM</button>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Pop')">Pop</button>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('HipHop')">Hip-Hop/Trap</button>
 
-    <div class="page_split">
-        <div class="page_split_1">	
-	       <div class="song-btn">
-                <button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)">
-                    <div class="album_art">
-                        <img id="song1 album art">
-                    </div> 
-
-                    <div id="songname1">Song 1</div>
-	                <div id="song-preview1"></div>
-                    <!--<button class="btn btn-default" id="picked1" onclick="update_prev(1)" type="button"> pick this one</button>-->
-                </button>
-            </div>
-
-            <br><br>
-
-	        <div class="song-btn">
-                <button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)">
-                    <div class="album_art">
-                        <img id="song2 album art">
-                    </div>
-
-                    <div id="songname2">Song 2</div>
-	                <div id="song-preview2"></div>
-                    <!--<button class="btn btn-default" type="button"> pick this one</button>-->
-                </button>
-            </div>
-
-            <br><br><br>
-
-        </div>
-
-        <div class="page_split_2">
-	       <div class="song-btn">
-                <button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)">
-                    <div class="album_art">
-                        <img id="song3 album art">
-                    </div>
-
-                    <div id="songname3">Song 3</div>
-	                <div id="song-preview3"></div>
-                    <!--<button class="btn btn-default" type="button"> pick this one</button>-->
-                </button>
-            </div>
-
-            <br><br>
-
-	        <div class="song-btn">
-                <button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)">
-                    <div class="album_art">
-                        <img id="song4 album art">
-                    </div>
-
-                    <div id="songname4">Song 4</div>
-	                <div id="song-preview4"></div>
-                    <!--<button class="btn btn-default" type="button"> pick this one</button>-->
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="page_split_3"></div>
-    <nobr>
-        <div class="indent">
-            <div class="score" id="score">Score: 0</div>
-        </div>
-    </nobr>
-
+</div>
 	<script type="text/javascript">
 
 	//this is test code to get the score db running. dont worry about it. im working on it -AH
@@ -174,6 +104,7 @@
     //var user_playlist = [];
     
     var EDMsongs = [];
+    var genre = '';
 
     function meme_alert() {
         if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){ //alerts for the song All Star
@@ -181,6 +112,16 @@
         } else{ //alerts for songs other than All Star
             window.alert("HA GOTEEEEEEEEEEEM");
         }
+    }
+
+    function pickgenre(pick){
+        genre = pick;
+
+        var gameBody = document.getElementById("genre");
+        gameBody.innerHTML = '<button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art"></div><div id="currentSong">Current Song</div><div id="song-preview0"></div></button><br><br><br><div class="page_split"><div class="page_split_1">  <div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art"></div> <div id="songname1">Song 1</div><div id="song-preview1"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art"></div><div id="songname2">Song 2</div><div id="song-preview2"></div></button></div><br><br><br></div><div class="page_split_2"><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art"></div><div id="songname3">Song 3</div><div id="song-preview3"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art"></div><div id="songname4">Song 4</div><div id="song-preview4"></div></button></div></div></div><div class="page_split_3"></div><nobr><div class="indent"><div class="score" id="score">Score: 0</div></div></nobr>';
+
+        // be able to get 4 different playlists
+        getPlaylist();
     }
 
     function getPlaylist() {
