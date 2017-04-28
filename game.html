@@ -57,7 +57,7 @@
     <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Rock')">Rock</button><br><br><br>
     <button class="btn btn-default current-btn" type="button" onclick="pickgenre('EDM')">EDM</button><br><br><br>
     <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Pop')">Pop</button><br><br><br>
-    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('HipHop')">Hip-Hop/Trap</button>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('HipHop')">Hip-Hop</button>
 
 </div>
 	<script type="text/javascript">
@@ -107,9 +107,13 @@
     var PlaylistSongs = [];
     var genre = '';
     var EDM_id = "3pK4cYF269adFRsBnEpkqy";
-    var Pop_id = "3ams0IeXLRUePb6FVmGZ1h";
-    var HipHop_id = "6XZSjg05uSVS0PfFx8ZqHs";
-    var Rock_id = "7nQaX6d1nzb0ukOIaSQdcF";
+    var Pop_id = "47f8hxeDzGiS5ASSCdacPY";
+    var HipHop_id = "55vTO8BONtIq4cckUbtl8p";
+    var Rock_id = "465Mkzc2D8lpvtFfh761FF";
+
+    // TODO:
+    // code to prevent multiple audio objects from playing at the same time
+    // http://stackoverflow.com/questions/20719550/play-one-html-audio-element-at-a-time
 
     function meme_alert() {
         if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){ //alerts for the song All Star
