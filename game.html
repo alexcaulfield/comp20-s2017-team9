@@ -53,9 +53,10 @@
 
 <div id="genre">
 
-    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Rock')">Rock</button>
-    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('EDM')">EDM</button>
-    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Pop')">Pop</button>
+    <br><br>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Rock')">Rock</button><br><br><br>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('EDM')">EDM</button><br><br><br>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Pop')">Pop</button><br><br><br>
     <button class="btn btn-default current-btn" type="button" onclick="pickgenre('HipHop')">Hip-Hop/Trap</button>
 
 </div>
@@ -103,8 +104,12 @@
     var num_songs_on_playlist = 1;      //keeps track of the number of songs on the user's playlist
     //var user_playlist = [];
     
-    var EDMsongs = [];
+    var PlaylistSongs = [];
     var genre = '';
+    var EDM_id = "3pK4cYF269adFRsBnEpkqy";
+    var Pop_id = "3ams0IeXLRUePb6FVmGZ1h";
+    var HipHop_id = "6XZSjg05uSVS0PfFx8ZqHs";
+    var Rock_id = "7nQaX6d1nzb0ukOIaSQdcF";
 
     function meme_alert() {
         if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){ //alerts for the song All Star
@@ -125,10 +130,19 @@
     }
 
     function getPlaylist() {
-        // playlist URI: 3pK4cYF269adFRsBnEpkqy
         // user ID: cauf
         
-        playlistUrl = 'https://api.spotify.com/v1/users/cauf/playlists/3pK4cYF269adFRsBnEpkqy' // EDM playlist
+        playlistUrl = 'https://api.spotify.com/v1/users/cauf/playlists/' 
+
+        if (genre == "Rock"){
+            playlistUrl += Rock_id;
+        }else if (genre == "EDM"){
+            playlistUrl += EDM_id;
+        }else if (genre == "Pop"){
+            playlistUrl += Pop_id;
+        }else if (genre == "HipHop"){
+            playlistUrl += HipHop_id;
+        }
 
         $.get('https://pop-quiz-dj.herokuapp.com/auth', function(data){
             accessToken = data;
@@ -145,7 +159,7 @@
                 },
                 success: function (response) {
                     for (var i = 0; i < response.tracks.items.length; i++) {
-                        EDMsongs[i] = response.tracks.items[i].track.id;
+                        PlaylistSongs[i] = response.tracks.items[i].track.id;
                     }
                     getCurrentSong();
                 },
@@ -160,7 +174,7 @@
 
     	if (newly_chosen_song_id != '') {
         
-            EDMsongs = EDMsongs.filter(function(el) {
+            PlaylistSongs = PlaylistSongs.filter(function(el) {
                 return el !== newly_chosen_song_id;  // removes songs from array when they are chosen
             });
 
@@ -329,7 +343,7 @@
 		while ((song_url == "https://api.spotify.com/v1/tracks/") || (song_url == song1) || (song_url == song2) || 
 				(song_url == song3) || (song_url == song4)){
 				
-            song_url += EDMsongs[(Math.floor((Math.random() * 100) + 1))%(EDMsongs.length)];
+            song_url += PlaylistSongs[(Math.floor((Math.random() * 100) + 1))%(PlaylistSongs.length)];
 		}
 
 		var pre_track = 'song-preview';
@@ -354,7 +368,7 @@
                     var songTitle = document.getElementById('currentSong');
                     songTitle.innerHTML = response.name;
                     
-                    EDMsongs = EDMsongs.filter(function(el) {
+                    PlaylistSongs = PlaylistSongs.filter(function(el) {
                         return el !== response.id;  // removes songs from array when they are chosen
                     });
                     
