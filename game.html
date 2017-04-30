@@ -111,10 +111,6 @@
     var HipHop_id = "55vTO8BONtIq4cckUbtl8p";
     var Rock_id = "465Mkzc2D8lpvtFfh761FF";
 
-    // TODO:
-    // code to prevent multiple audio objects from playing at the same time
-    // http://stackoverflow.com/questions/20719550/play-one-html-audio-element-at-a-time
-
     function meme_alert() {
         if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){ //alerts for the song All Star
             window.alert("I know we all want to party to All Star on repeat, but you gotta pick something else");
@@ -194,9 +190,18 @@
                     country: 'US'
                 },
             success: function (response) {
-                audioObject = new Audio();
+                audioObject = new Audio();    
+                // code to prevent multiple audio objects from playing at the same time
+                // http://stackoverflow.com/questions/20719550/play-one-html-audio-element-at-a-time
+                $(function(){
+                    $("audio").on("play", function() {
+                        $("audio").not(this).each(function(index, audio) {
+                            audio.pause();
+                        });
+                    });
+                });
 
-                trackPreview.innerHTML = '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="'
+                trackPreview.innerHTML = '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="'
                  + response.preview_url  + '" type="audio/mpeg">';
 
                 songTitle.innerHTML = response.name + "<br>" + response.artists[0].name;   
@@ -364,8 +369,17 @@
     			previewUrl = response.preview_url;
     			
                 audioObject = new Audio(); 
+
+                // makes it so not multiple audio objects get played at the same time
+                $(function(){
+                    $("audio").on("play", function() {
+                        $("audio").not(this).each(function(index, audio) {
+                            audio.pause();
+                        });
+                    });
+                });
     			
-                previewTrack.innerHTML = response.artists[0].name + '<audio class="song-audio" id="audio-player" style="width: 400px;" controls="controls" src="' + response.preview_url  + '" type="audio/mpeg"></audio>';
+                previewTrack.innerHTML = response.artists[0].name + '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="' + response.preview_url  + '" type="audio/mpeg"></audio>';
 
                 if (num == 0){
 
