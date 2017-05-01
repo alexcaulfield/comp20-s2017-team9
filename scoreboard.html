@@ -51,6 +51,7 @@
     var xhr = new XMLHttpRequest();
 
     function getScores(){
+      var username = undefined;
       xhr.open('GET', 'https://pop-quiz-dj.herokuapp.com/getScore');
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhr.onreadystatechange = function(){
@@ -58,7 +59,7 @@
           populateScoreboard(xhr.responseText);
         }
       }
-      xhr.send("");
+      xhr.send(username);
     }
   
     function populateScoreboard(responseText){

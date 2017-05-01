@@ -310,8 +310,8 @@
         elem.innerHTML = "Score: " + score;
 
         if (num_songs_on_playlist == 5){
-            var username = prompt("Please eneter your initials");
-            window.alert(username+", your Score is: " + score);
+            var username = prompt("Please enter your initials");
+            window.alert(username+", your score is: " + score);
             saveScore(username, score);
             window.location.replace("scoreboard.html");
         } 
@@ -449,8 +449,17 @@
 	};
 	
     function saveScore(username, score){
-        //db.scores.insert({"username":username, "score":score});
         console.log("Username: "+username+"inserted in db with score: "+score);
+        var httpRequest = new XMLHttpRequest
+        httpRequest.open('POST', 'https://pop-quiz-dj.herokuapp.com/addScore', true);
+        httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpRequest.onreadystatechange = function(){
+            if(httpRequest = 4){
+                console.log(httpRequest.responseText);
+            }
+        }
+        httpRequest.send("username="+username+"&score"+score);
+        console.log("score sent")
     }
 
 	</script>
