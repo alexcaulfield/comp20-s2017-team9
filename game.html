@@ -449,7 +449,19 @@
         });
 	};
 	
-
+    function saveScore(username, score){
+        console.log("Username: "+username+"inserted in db with score: "+score);
+        var httpRequest = new XMLHttpRequest
+        httpRequest.open('POST', 'https://pop-quiz-dj.herokuapp.com/addScore', true);
+        httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        httpRequest.onreadystatechange = function(){
+            if(httpRequest = 4){
+                console.log(httpRequest.responseText);
+            }
+        }
+        httpRequest.send("username="+username+"&score"+score);
+        console.log("score sent")
+    }
 	</script>
 
 </body>
