@@ -366,66 +366,72 @@
 		          country: 'US'
 		        },
     		success: function (response) {
-    			previewUrl = response.preview_url;
-    			
-                audioObject = new Audio(); 
+                if (response.preview_url == null) {   
+                    getSong(num, callback);
+                }
+                else {  
 
-                // makes it so not multiple audio objects get played at the same time
-                $(function(){
-                    $("audio").on("play", function() {
-                        $("audio").not(this).each(function(index, audio) {
-                            audio.pause();
+        			previewUrl = response.preview_url;
+        			
+                    audioObject = new Audio(); 
+
+                    // makes it so not multiple audio objects get played at the same time
+                    $(function(){
+                        $("audio").on("play", function() {
+                            $("audio").not(this).each(function(index, audio) {
+                                audio.pause();
+                            });
                         });
                     });
-                });
-    			
-                previewTrack.innerHTML = response.artists[0].name + '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="' + response.preview_url  + '" type="audio/mpeg"></audio>';
+        			
+                    previewTrack.innerHTML = response.artists[0].name + '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="' + response.preview_url  + '" type="audio/mpeg"></audio>';
 
-                if (num == 0){
+                    if (num == 0){
 
-                    var songTitle = document.getElementById('currentSong');
-                    songTitle.innerHTML = response.name;
-                    
-                    PlaylistSongs = PlaylistSongs.filter(function(el) {
-                        return el !== response.id;  // removes songs from array when they are chosen
-                    });
-                    
-                    newly_chosen_song_id = response.id;
-                    requestToken(0);
+                        var songTitle = document.getElementById('currentSong');
+                        songTitle.innerHTML = response.name;
+                        
+                        PlaylistSongs = PlaylistSongs.filter(function(el) {
+                            return el !== response.id;  // removes songs from array when they are chosen
+                        });
+                        
+                        newly_chosen_song_id = response.id;
+                        requestToken(0);
+                    }
+
+        			if (num == 1){
+                        document.getElementById("song1 album art").src=response.album.images[2].url;
+        				songname1.innerHTML = response.name;
+        				song1 = song_url;
+                        
+                        // parses URL so that the var only holds song_id
+                        song1_id = song1.replace("https://api.spotify.com/v1/tracks/","");
+                        song1 = song_url;
+        			}
+        			else if (num == 2){
+                        document.getElementById("song2 album art").src=response.album.images[2].url;
+        				songname2.innerHTML = response.name;
+        				song2 = song_url;
+                        song2_id = song2.replace("https://api.spotify.com/v1/tracks/","");
+                        song2 = song_url;
+        			}
+        			else if (num ==3){
+                        document.getElementById("song3 album art").src=response.album.images[2].url;
+        				songname3.innerHTML = response.name;
+        				song3 = song_url;
+                        song3_id = song3.replace("https://api.spotify.com/v1/tracks/","");
+                        song3 = song_url;
+        			}
+        			else if (num ==4){
+                        document.getElementById("song4 album art").src=response.album.images[2].url;
+        				songname4.innerHTML = response.name;
+        				song4 = song_url;
+                        song4_id = song4.replace("https://api.spotify.com/v1/tracks/","");
+                        song4 = song_url;
+        			}
+
+                    callback();
                 }
-
-    			if (num == 1){
-                    document.getElementById("song1 album art").src=response.album.images[2].url;
-    				songname1.innerHTML = response.name;
-    				song1 = song_url;
-                    
-                    // parses URL so that the var only holds song_id
-                    song1_id = song1.replace("https://api.spotify.com/v1/tracks/","");
-                    song1 = song_url;
-    			}
-    			else if (num == 2){
-                    document.getElementById("song2 album art").src=response.album.images[2].url;
-    				songname2.innerHTML = response.name;
-    				song2 = song_url;
-                    song2_id = song2.replace("https://api.spotify.com/v1/tracks/","");
-                    song2 = song_url;
-    			}
-    			else if (num ==3){
-                    document.getElementById("song3 album art").src=response.album.images[2].url;
-    				songname3.innerHTML = response.name;
-    				song3 = song_url;
-                    song3_id = song3.replace("https://api.spotify.com/v1/tracks/","");
-                    song3 = song_url;
-    			}
-    			else if (num ==4){
-                    document.getElementById("song4 album art").src=response.album.images[2].url;
-    				songname4.innerHTML = response.name;
-    				song4 = song_url;
-                    song4_id = song4.replace("https://api.spotify.com/v1/tracks/","");
-                    song4 = song_url;
-    			}
-
-                callback();
     		},
     		error: function (response) {
     		   // console.log("ERROR: Track not found");
