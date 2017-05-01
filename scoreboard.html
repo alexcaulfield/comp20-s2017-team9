@@ -48,28 +48,30 @@
   </nav>
 
   <script>
-    var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://ahanso01:Allball634@ds161190.mlab.com:61190/heroku_b3ks50c0';
-    var MongoClient = require('mongodb').MongoClient, format = require('util').format;
-    var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
-      if(error){
-        console.log("error"+ error)
-      } else {
-        console.log("successfully connected to db")
-      }
-      db = databaseConnection;
-    });
+    var xhr = new XMLHttpRequest();
 
-/* this is just boiler-plate to get the scores from the database onto the scoreboard table. Still working on it-AH
-    function displayScore(){
-      var scoreTable = document.getElementById(scoretable);
-      for (var i = db.score.length - 1; i >= 0; i--) {
-        currPlayer = db.score.find();
-        scoreTable[i].username = currPlayer.username;
-        scoretable[i].score = currPlayer.score;
-      };
+    function getScores(){
+      xhr.open('GET', 'https://pop-quiz-dj.herokuapp.com/getScore');
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+          populateScoreboard(xhr.responseText);
+        }
+      }
+      xhr.send("");
     }
-*/
   
+    function populateScoreboard(responseText){
+      var username = null;
+      var score = 0;
+      var data = JSON.parse(responseText);
+
+      for (var i = data.length - 1; i >= 0; i--) {
+        username = data[i].username;
+        score = data[i].score;
+      };
+
+    }
   </script>
 
   <div class="container">

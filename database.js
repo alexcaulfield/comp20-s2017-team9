@@ -1,3 +1,4 @@
+console.log("database.js")
 var express = require('express');
 var bodyParser = require('body-parser');
 var validator = require('validator');
@@ -5,9 +6,12 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://DJTrac:Cones69@ds121091.mlab.com:21091/heroku_wlx3nln5';
+var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/mydatabase' || 'mongodb://DJTrac:Cones69@ds121091.mlab.com:21091/heroku_wlx3nln5';
 var MongoClient = require('mongodb').MongoClient, format = require('util').format;
 var db = MongoClient.connect(mongoUri, function(error, databaseConnection) {
+	if(error){
+		console.log(error);
+	} 
 	db = databaseConnection;
 });
 
@@ -22,12 +26,14 @@ app.post('/addScore', function(request, response){
 	score = parseFloat(score);
 
 	var toInsert = {
-		"username":username;
-		"score":score;
+		"username":username,
+		"score":score
 	}
 
+	console.log(toInsert);
+
 	db.collection('scores', function(error, collection) {
-		collection.update({"username":username}, toInsert, {upsert: true}, function(errorUpdate, result){
+		collection.insert(toInsert, function(errorUpdate, result){
 			db.collection('scores', function(errorCollection, scoresCollection){
 				scoresCollection.find({}).toArray(function(errorFind, scores) {
 					results.scores = scores;
@@ -36,14 +42,30 @@ app.post('/addScore', function(request, response){
 			});
 		});
 	});
+
 });
 
 app.get('/getScore', function(request, response){
-	var usernameRequest = request.query.username;
+	var usernameRequest = undefined;
+	if(request.query.username){
+		usernameRequest = request.query.username;
+		console.log("username:" + usernameRequest)
+	}
 	if(usernameRequest == undefined || usernameRequest == null){
+		db.collection('scores', function(error, collection){
+			collection.find({}, function(error, result){
+				console.log(result);
+				if(!result){
+					response.send("{}");
+				} else {
+					response.send(result);
+				}
+			});
+		});
 		response.send("{}");
 	} else {
 		db.collection('scores', function(error, collection){
+			console.log("second username:"+usernameRequest);
 			collection.findOne({username:usernameRequest}, function(error, result) {
 				if(!result) {
 					response.send("{}");
@@ -53,26 +75,8 @@ app.get('/getScore', function(request, response){
 			});
 		});
 	}
+}); 
+
+app.listen(process.env.PORT || 3000, function(){
+	console.log("listening");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-function displayScore(){
-  var scoreTable = document.getElementById(scoretable);
-  for (var i = db.score.length - 1; i >= 0; i--) {
-    currPlayer = db.score.find();
-    scoreTable[i].username = currPlayer.username;
-    scoretable[i].score = currPlayer.score;
-  };
-}
-  

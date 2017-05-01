@@ -310,8 +310,9 @@
         elem.innerHTML = "Score: " + score;
 
         if (num_songs_on_playlist == 5){
-            window.alert("Your Score is: " + score);
-            // add score into database
+            var username = prompt("Please eneter your initials");
+            window.alert(username+", your Score is: " + score);
+            saveScore(username, score);
             window.location.replace("scoreboard.html");
         } 
     }
@@ -448,9 +449,9 @@
 	};
 	
     function saveScore(username, score){
-		db.scores.insert({"username":username, "score":score});
-		console.log("Username: "+username+"inserted in db with score: "+score);
-	}
+        //db.scores.insert({"username":username, "score":score});
+        console.log("Username: "+username+"inserted in db with score: "+score);
+    }
 
 	</script>
 
