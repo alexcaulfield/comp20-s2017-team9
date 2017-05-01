@@ -53,21 +53,17 @@ app.get('/getScore', function(request, response){
 	}
 	if(usernameRequest == undefined || usernameRequest == null){
 		db.collection('scores', function(error, collection){
-			collection.find({}, function(error, result){
-				console.log(result);
-				if(!result){
-					response.send("{}");
-				} else {
-					response.send(result);
-				}
+			collection.find({}).toArray(function(error, result){
+				response.send(result);
 			});
 		});
-		response.send("{}");
+		console.log("sending in if");
 	} else {
 		db.collection('scores', function(error, collection){
 			console.log("second username:"+usernameRequest);
 			collection.findOne({username:usernameRequest}, function(error, result) {
 				if(!result) {
+					console.log("sending in else");
 					response.send("{}");
 				} else {
 					response.send(result);
