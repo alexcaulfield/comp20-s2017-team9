@@ -22,6 +22,7 @@
             $('navbar-collapse').dropdown()
         });
     </script>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 <body class="game_background">
     <nav class="navbar navbar-default" role="navigation">
@@ -284,7 +285,7 @@
 
         elem.innerHTML = "Score: " + score;
         elem_mobile.innerHTML = "Score: " + score;
-        if (num_songs_on_playlist == 5){
+        if (num_songs_on_playlist == 7){
             var username = prompt("Please enter your DJ Name");
             window.alert(username+", your score is: " + score);
             saveScore(username, score);
