@@ -345,7 +345,9 @@
   $("#submit-modal").submit(function(event) {
     event.preventDefault();
     var $form = $("#score_submit_form");
-    var username = "DJ "+ $form.find('input[name="score_username"]').val();
+    var unsanitized = $form.find('input[name="score_username"]').val();
+    var sanitized = unsanitized.replace(/[^\w\s]/gi, '')
+    var username = "DJ " + sanitized;
     saveScore(username, score);
     document.getElementById("thank_you").innerHTML = "Thanks for Playing " + username + "!";
     document.getElementById("score_report").innerHTML = "Your score is: " + score;
