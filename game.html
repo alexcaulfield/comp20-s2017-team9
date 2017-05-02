@@ -24,6 +24,49 @@
     </script>
 </head>
 <body class="game_background">
+
+<div class="modal fade" id="submit-modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:10px 25px;">
+          <h4 id = 'modal_new_score_header'>
+            What shall we call you?
+          </h4>
+        </div>
+        <div class="modal-body" style="padding:10px 12px;">
+        <p id="modal_new_score_display"></p>
+          <form role="form" id="score_submit_form">
+            <div class="form-group">
+              <label for="username_input">Username</label>
+              <input type="text" class="form-control" id="username_input" name="score_username">
+            </div>
+              <button type="submit" class="btn btn-primary">Submit Score</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade" id="score-modal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="padding:10px 25px;">
+                <h3><div id=thank_you>Thanks for Playing!</div></h3>
+          </div>
+          <div class="modal-body" style="padding:10px 12px;">
+            <p><h4><div id="score_report"></div></h4></p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" onclick="goTo('scoreboard.html')" aria-hidden="true">View High Scores</button>
+            <button class="btn btn-primary" data-dismiss="modal" onclick="goTo('game.html')" aria-hidden="true">Play Again!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
     <nav class="navbar navbar-default" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -276,11 +319,26 @@
         elem = document.getElementById("score");    // adds score to the game page
         elem.innerHTML = "Score: " + score;
         if (num_songs_on_playlist == 5){
-            var username = prompt("Please enter your initials");
-            window.alert(username+", your score is: " + score);
-            saveScore(username, score);
-            window.location.replace("scoreboard.html");
+            //var username = prompt("Please enter your initials");
+            $("#submit-modal").modal('toggle');
+            //saveScore(username, score);
+            //document.getElementById("score_report").innerHTML = "Your score is: " + score;
+            //$("#score-modal").modal('toggle');
+            //window.alert(username+", your score is: " + score);
+            //window.location.replace("scoreboard.html");
         } 
+    }
+  $("#submit-modal").submit(function(event) {
+    event.preventDefault();
+    var $form = $("#score_submit_form");
+    var username = $form.find('input[name="score_username"]').val();
+    saveScore(username, score);
+    document.getElementById("thank_you").innerHTML = "Thanks for Playing DJ " + username + "!";
+    document.getElementById("score_report").innerHTML = "Your score is: " + score;
+    $("#score-modal").modal('toggle');
+    });
+    function goTo(page) {
+        window.location.replace(page);
     }
     function get_song_features(song_id){
         var song_url = 'https://api.spotify.com/v1/audio-features/' + song_id;
