@@ -25,13 +25,13 @@
 </head>
 <body class="game_background">
 
-<div class="modal fade" id="submit-modal" role="dialog">
+<div class="modal fade" id="submit-modal" role="dialog" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header" style="padding:10px 25px;">
           <h4 id = 'modal_new_score_header'>
-            What shall we call you?
+            What's your DJ name?
           </h4>
         </div>
         <div class="modal-body" style="padding:10px 12px;">
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-    <div class="modal fade" id="score-modal" role="dialog">
+    <div class="modal fade" id="score-modal" role="dialog" data-keyboard="false" data-backdrop="static">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -329,6 +329,10 @@
         elem_mobile.innerHTML = "Score: " + score;
         if (num_songs_on_playlist == 5){
             //var username = prompt("Please enter your initials");
+            //$('#submit-modal').modal({
+            //    backdrop: 'static',
+            //    keyboard: false
+            //})
             $("#submit-modal").modal('toggle');
             //saveScore(username, score);
             //document.getElementById("score_report").innerHTML = "Your score is: " + score;
@@ -340,9 +344,9 @@
   $("#submit-modal").submit(function(event) {
     event.preventDefault();
     var $form = $("#score_submit_form");
-    var username = $form.find('input[name="score_username"]').val();
+    var username = "DJ "+ $form.find('input[name="score_username"]').val();
     saveScore(username, score);
-    document.getElementById("thank_you").innerHTML = "Thanks for Playing DJ " + username + "!";
+    document.getElementById("thank_you").innerHTML = "Thanks for Playing " + username + "!";
     document.getElementById("score_report").innerHTML = "Your score is: " + score;
     $("#score-modal").modal('toggle');
     });

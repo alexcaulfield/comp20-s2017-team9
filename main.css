@@ -168,6 +168,10 @@ h2 {
     float:left;
 }
 
+.modal-header {
+    text-align: center;
+}
+
 img.centered {
     display: block;
     margin-right: auto;
