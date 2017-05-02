@@ -20,13 +20,15 @@
     .navbar-right {
         padding-right: 0%;
     }
+}
 
+@media (min-width:1080px){
     .mobile {
         display: none;
     }
 }
 
-@media (max-width:600px){
+@media (max-width:1080px){
     .desktop{
         display: none;
     }
