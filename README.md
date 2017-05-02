@@ -1,4 +1,4 @@
-# Pop Quiz
+# Mix Master
 
 ### Problem Statement
 People don't know how to choose the next song in a playlist.
@@ -38,6 +38,15 @@ Have an interactive game that gives people more points for choosing songs that a
 
 #### Scoreboard
 ![Image of scoreboard](mockups/scoreboard.png)
+
+## End of project writeup
+
+### Implementation
+* Front End - We used several different web development technologies on the front end including using Bootstrap as a framework.
+* Back End - We used the Spotify API to get information on songs, as well as 30 second previews of the songs that allow the user to play well known sections of songs and will help them make more informed choices. We used a MongoDB database to store their scores and used HTTP requests to retrieve their scores and populate our global leader score board. We also used a location finder using the Google Maps API to show pictures of popular concert venues on the homepage. 
+
+#### What We Learned & Tradeoffs Encountered
+* There were several lessons that we learned while making this project. There were times when we ran into challenges that were causing a lot of frustration within the group, and we soon learned that by putting that issue to the side for a period of time, it often became much easier to solve the problem after coming back to it several hours later. We also quickly realized that dividing different parts of the project between the group members allowed us to make much more progress, much more quickly. We were planning on making several tradeoffs throughout the project, but we ended up making a product that accomplished every thing we wanted to and is something that we can all be proud of. We ended up not needing to make any significant tradeoffs.
 
 #Comments by Ming
 * My only gripe is the title --it doesn't reflect the premise of this fantastic idea.  I was thinking it would be another academic flash card game but I was wrong, very wrong.
