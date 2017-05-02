@@ -116,7 +116,7 @@
     function pickgenre(pick){
         genre = pick;
         var gameBody = document.getElementById("genre");
-        gameBody.innerHTML = '<section class="desktop"><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art"></div><div id="currentSong">Current Song</div><div id="song-preview0"></div></button><br><br><br><div class="page_split"><div class="page_split_1">  <div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art"></div> <div id="songname1">Song 1</div><div id="song-preview1"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art"></div><div id="songname2">Song 2</div><div id="song-preview2"></div></button></div><br><br><br></div><div class="page_split_2"><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art"></div><div id="songname3">Song 3</div><div id="song-preview3"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art"></div><div id="songname4">Song 4</div><div id="song-preview4"></div></button></div></div></div><div class="page_split_3"></div><nobr><div class="indent"><div class="score" id="score">Score: 0</div></div></nobr></section><section class ="mobile"><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art"></div><div id="currentSong">Current Song</div><div id="song-preview0"></div></button><br><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art"></div><div id="songname1">Song 1</div><div id="song-preview1"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art"></div><div id="songname2">Song 2</div><div id="song-preview2"></div></button></div><br><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art"></div><div id="songname3">Song 3</div><div id="song-preview3"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art"></div><div id="songname4">Song 4</div><div id="song-preview4"></div></button></div><nobr><div class="indent"><div class="score" id="score">Score: 0</div></div></nobr></section>';
+        gameBody.innerHTML = '<section class="desktop"><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art"></div><div id="currentSong">Current Song</div><div id="song-preview0"></div></button><br><br><br><div class="page_split"><div class="page_split_1">  <div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art"></div> <div id="songname1">Song 1</div><div id="song-preview1"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art"></div><div id="songname2">Song 2</div><div id="song-preview2"></div></button></div><br><br><br></div><div class="page_split_2"><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art"></div><div id="songname3">Song 3</div><div id="song-preview3"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art"></div><div id="songname4">Song 4</div><div id="song-preview4"></div></button></div></div></div><div class="page_split_3"></div><nobr><div class="indent"><div class="score" id="score">Score: 0</div></div></nobr></section><section class ="mobile"><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art mobile"></div><div id="currentSong_mobile">Current Song</div><div id="song-preview0_mobile"></div></button><br><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art mobile"></div><div id="songname1_mobile">Song 1</div><div id="song-preview1_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art mobile"></div><div id="songname2_mobile">Song 2</div><div id="song-preview2_mobile"></div></button></div><br><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art mobile"></div><div id="songname3_mobile">Song 3</div><div id="song-preview3_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art mobile"></div><div id="songname4_mobile">Song 4</div><div id="song-preview4_mobile"></div></button></div><nobr><div class="indent"><div class="score" id="score_mobile">Score: 0</div></div></nobr></section>';
         // be able to get 4 different playlists
         getPlaylist();
     }
@@ -166,7 +166,9 @@
             songUrl = "https://api.spotify.com/v1/tracks/";
             songUrl += newly_chosen_song_id;
             var trackPreview = document.getElementById('song-preview0');
+            var trackPreview_mobile = document.getElementById('song-preview0_mobile');
             var songTitle = document.getElementById('currentSong');
+            var songTitle_mobile = document.getElementById('currentSong_mobile');
             $.ajax({
                 url: songUrl,
                 data: {
@@ -185,9 +187,13 @@
                 });
                 trackPreview.innerHTML = '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="'
                  + response.preview_url  + '" type="audio/mpeg">';
-                songTitle.innerHTML = response.name + "<br>" + response.artists[0].name;   
+                trackPreview_mobile.innerHTML = '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="'
+                 + response.preview_url  + '" type="audio/mpeg">'; 
+                songTitle.innerHTML = response.name + "<br>" + response.artists[0].name;
+                songTitle_mobile.innerHTML =    response.name + "<br>" + response.artists[0].name;
                 
-                document.getElementById("current album art").src=response.album.images[2].url;              
+                document.getElementById("current album art").src=response.album.images[2].url;  
+                document.getElementById("current album art mobile").src=response.album.images[2].url;            
             },
             error: function (response) {
                 alert("ERROR");
@@ -274,7 +280,10 @@
         score += similarity;
         //console.log("score: " + score);
         elem = document.getElementById("score");    // adds score to the game page
+        elem_mobile = document.getElementById('score_mobile');
+
         elem.innerHTML = "Score: " + score;
+        elem_mobile.innerHTML = "Score: " + score;
         if (num_songs_on_playlist == 5){
             var username = prompt("Please enter your initials");
             window.alert(username+", your score is: " + score);
@@ -318,6 +327,11 @@
         var pre_track = 'song-preview';
             pre_track += num;
         var previewTrack = document.getElementById(pre_track);
+
+        var pre_track_mobile = 'song-preview';
+            pre_track_mobile += num + '_mobile';
+        var previewTrack_mobile = document.getElementById(pre_track_mobile);
+
         $.ajax({
           url: song_url,
           data: {
@@ -342,9 +356,14 @@
                     });
                     
                     previewTrack.innerHTML = response.artists[0].name + '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="' + response.preview_url  + '" type="audio/mpeg"></audio>';
+
+                    previewTrack_mobile.innerHTML = response.artists[0].name + '<audio class="song-audio playback" id="audio-player" style="width: 400px;" controls="controls" src="' + response.preview_url  + '" type="audio/mpeg"></audio>';
                     if (num == 0){
                         var songTitle = document.getElementById('currentSong');
                         songTitle.innerHTML = response.name;
+
+                        var songTitle_mobile = document.getElementById('currentSong_mobile');
+                        songTitle_mobile.innerHTML = response.name;
                         
                         PlaylistSongs = PlaylistSongs.filter(function(el) {
                             return el !== response.id;  // removes songs from array when they are chosen
@@ -355,7 +374,14 @@
                     }
                     if (num == 1){
                         document.getElementById("song1 album art").src=response.album.images[2].url;
+                        document.getElementById("song1 album art mobile").src=response.album.images[2].url;
+
+                        var songname1 = document.getElementById("songname1");
                         songname1.innerHTML = response.name;
+
+                        var songname1_mobile = document.getElementById('songname1_mobile');
+                        songname1_mobile.innerHTML = response.name;
+
                         song1 = song_url;
                         
                         // parses URL so that the var only holds song_id
@@ -364,21 +390,42 @@
                     }
                     else if (num == 2){
                         document.getElementById("song2 album art").src=response.album.images[2].url;
+                        document.getElementById("song2 album art mobile").src=response.album.images[2].url;
+
+                        var songname2 = document.getElementById("songname2");
                         songname2.innerHTML = response.name;
+
+                        var songname2_mobile = document.getElementById('songname2_mobile');
+                        songname2_mobile.innerHTML = response.name;
+
                         song2 = song_url;
                         song2_id = song2.replace("https://api.spotify.com/v1/tracks/","");
                         song2 = song_url;
                     }
                     else if (num ==3){
                         document.getElementById("song3 album art").src=response.album.images[2].url;
+                        document.getElementById("song3 album art mobile").src=response.album.images[2].url;
+
+                        var songname3 = document.getElementById("songname3");
                         songname3.innerHTML = response.name;
+
+                        var songname3_mobile = document.getElementById('songname3_mobile');
+                        songname3_mobile.innerHTML = response.name;
+
                         song3 = song_url;
                         song3_id = song3.replace("https://api.spotify.com/v1/tracks/","");
                         song3 = song_url;
                     }
                     else if (num ==4){
                         document.getElementById("song4 album art").src=response.album.images[2].url;
+                        document.getElementById("song4 album art mobile").src=response.album.images[2].url;
+
+                        var songname4 = document.getElementById("songname4");
                         songname4.innerHTML = response.name;
+
+                        var songname4_mobile = document.getElementById('songname4_mobile');
+                        songname4_mobile.innerHTML = response.name;
+
                         song4 = song_url;
                         song4_id = song4.replace("https://api.spotify.com/v1/tracks/","");
                         song4 = song_url;
