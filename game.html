@@ -150,6 +150,9 @@
     var Pop_id = "47f8hxeDzGiS5ASSCdacPY";
     var HipHop_id = "55vTO8BONtIq4cckUbtl8p";
     var Rock_id = "465Mkzc2D8lpvtFfh761FF";
+
+    var PlayerPlaylist = [];
+
     function meme_alert() {
         if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){ //alerts for the song All Star
             window.alert("I know we all want to party to All Star on repeat, but you gotta pick something else");
@@ -209,6 +212,10 @@
             });
             songUrl = "https://api.spotify.com/v1/tracks/";
             songUrl += newly_chosen_song_id;
+            
+            PlayerPlaylist.push(newly_chosen_song_id);
+            console.log(PlayerPlaylist);
+
             var trackPreview = document.getElementById('song-preview0');
             var trackPreview_mobile = document.getElementById('song-preview0_mobile');
             var songTitle = document.getElementById('currentSong');
@@ -251,6 +258,7 @@
         num_songs_on_playlist++; //updates playlist
         prev_chosen_song_id = newly_chosen_song_id;             //updates song choices
         prev_chosen_song_features = newly_chosen_song_features;
+        
         if (num == 1){ 
             newly_chosen_song_id = song1_id;
             if (song1_id == "3cfOd4CMv2snFaKAnMdnvK"){
