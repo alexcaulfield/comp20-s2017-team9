@@ -9,6 +9,7 @@
     <title>Game</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="semantic.css">
 
     <link rel ="stylesheet" href="bootstrap.css">
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -163,7 +164,8 @@
     function pickgenre(pick){
         genre = pick;
         var gameBody = document.getElementById("genre");
-        gameBody.innerHTML = '<section class="desktop"><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art"></div><div id="currentSong">Current Song</div><div id="song-preview0"></div></button><br><br><br><div class="page_split"><div class="page_split_1">  <div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art"></div> <div id="songname1">Song 1</div><div id="song-preview1"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art"></div><div id="songname2">Song 2</div><div id="song-preview2"></div></button></div><br><br><br></div><div class="page_split_2"><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art"></div><div id="songname3">Song 3</div><div id="song-preview3"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art"></div><div id="songname4">Song 4</div><div id="song-preview4"></div></button></div></div></div><div class="page_split_3"></div><nobr><div class="score" id="score">Score: 0</div></nobr></section><section class ="mobile"><div class="title">Current Song</div><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art mobile"></div><div id="currentSong_mobile">Current Song</div><div id="song-preview0_mobile"></div></button><br><br><br><div class="song_choices">New Song Choices</div><div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art mobile"></div><div id="songname1_mobile">Song 1</div><div id="song-preview1_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art mobile"></div><div id="songname2_mobile">Song 2</div><div id="song-preview2_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art mobile"></div><div id="songname3_mobile">Song 3</div><div id="song-preview3_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art mobile"></div><div id="songname4_mobile">Song 4</div><div id="song-preview4_mobile"></div></button></div><br><br><nobr><div class="score" id="score_mobile">Score: 0</div></nobr></section>';
+        gameBody.innerHTML = '<div style="width: 100%;"><div style="float:left; width: 70%"><section class="desktop"><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art"></div><div id="currentSong">Current Song</div><div id="song-preview0"></div></button><br><br><br><div class="page_split"><div class="page_split_1">  <div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art"></div> <div id="songname1">Song 1</div><div id="song-preview1"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art"></div><div id="songname2">Song 2</div><div id="song-preview2"></div></button></div><br><br><br></div><div class="page_split_2"><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art"></div><div id="songname3">Song 3</div><div id="song-preview3"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art"></div><div id="songname4">Song 4</div><div id="song-preview4"></div></button></div></div></div><div class="page_split_3"></div><nobr><div class="score" id="score">Score: 0</div></nobr></section><section class ="mobile"><div class="title">Current Song</div><button class="btn btn-default current-btn" type="button" onclick="meme_alert()"><div class="album_art"><img id="current album art mobile"></div><div id="currentSong_mobile">Current Song</div><div id="song-preview0_mobile"></div></button><br><br><br><div class="song_choices">New Song Choices</div><div class="song-btn"><button class="btn btn-default" type="button" id="picked1" onclick="update_prev(1)"><div class="album_art"><img id="song1 album art mobile"></div><div id="songname1_mobile">Song 1</div><div id="song-preview1_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked2" onclick="update_prev(2)"><div class="album_art"><img id="song2 album art mobile"></div><div id="songname2_mobile">Song 2</div><div id="song-preview2_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked3" onclick="update_prev(3)"><div class="album_art"><img id="song3 album art mobile"></div><div id="songname3_mobile">Song 3</div><div id="song-preview3_mobile"></div></button></div><br><br><div class="song-btn"><button class="btn btn-default" type="button" id="picked4" onclick="update_prev(4)"><div class="album_art"><img id="song4 album art mobile"></div><div id="songname4_mobile">Song 4</div><div id="song-preview4_mobile"></div></button></div><br><br><nobr><div class="score" id="score_mobile">Score: 0</div></nobr></section></div><div style="float:right; width:30%"><div class="ui list playlist" id="song_list"><h2>Playlist</h2></div></div></div><div style="clear:both"></div>';
+
         // be able to get 4 different playlists
         getPlaylist();
     }
@@ -242,6 +244,17 @@
                  + response.preview_url  + '" type="audio/mpeg">'; 
                 songTitle.innerHTML = response.name + "<br>" + response.artists[0].name;
                 songTitle_mobile.innerHTML =    response.name + "<br>" + response.artists[0].name;
+
+                var id_title = "playlist_song";
+                id_title += num_songs_on_playlist;
+                var artwork_id_title = id_title + '.album_art';
+                var name_id_title = id_title + '.name';
+
+                document.getElementById('song_list').innerHTML += '<div class="item"><img class="ui avatar image" id="playlist_song' + num_songs_on_playlist + '.album_art"><div class="content"><div class="header" id="playlist_song' + num_songs_on_playlist + '"></div><div class="description" id="playlist_song' + num_songs_on_playlist + '.name"></div></div></div>';
+
+                document.getElementById(id_title).innerHTML = response.name;
+                document.getElementById(artwork_id_title).src=response.album.images[2].url;      
+                document.getElementById(name_id_title).innerHTML = response.artists[0].name;
                 
                 document.getElementById("current album art").src=response.album.images[2].url;  
                 document.getElementById("current album art mobile").src=response.album.images[2].url;            
@@ -536,7 +549,6 @@
             }
         }
         httpRequest.send("username="+username+"&score="+score);
-        console.log("score sent")
     }
     </script>
 

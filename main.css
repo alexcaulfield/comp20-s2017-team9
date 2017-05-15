@@ -123,7 +123,7 @@ h2 {
 }
 
 .game_background {
-    background-image: url(dj.jpg);
+    background-image: url(dj_red.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -145,8 +145,8 @@ h2 {
 }
 
 .page_split {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 0%;
+    padding-right: 0%;
     width: 100%;
 }
 
@@ -218,4 +218,8 @@ img.centered {
     width: 150px;
     text-align: center;
     background-color: lightgrey;
+}
+
+.playlist {
+    background-color: white;  
 }
