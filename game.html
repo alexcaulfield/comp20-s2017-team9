@@ -96,16 +96,45 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-<div id="genre">
+<div id="genre" class="center">
 
     <br><br>
-    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Rock')">Rock</button><br><br><br>
+
+    <select name="genre" class="ui dropdown" id="select_genre">
+          <option value="">Genre</option>
+          <option value="Rock">Rock</option>
+          <option value="EDM">EDM</option>
+          <option value="Pop">Pop</option>
+          <option value="HipHop">HipHop</option>
+    </select>
+
+    <br><br><br><br><br>
+
+    <select name="num_songs" class="ui dropdown" id="select_num">
+        <option value="">Number of Songs</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+
+    <br><br><br><br><br>
+
+    <button class="positive ui button massive" onclick="start_game()">Let's &nbsp;&nbsp; Play!</button>
+    <!--<button class="btn btn-default current-btn" type="button" onclick="pickgenre('Rock')">Rock</button><br><br><br>
     <button class="btn btn-default current-btn" type="button" onclick="pickgenre('EDM')">EDM</button><br><br><br>
     <button class="btn btn-default current-btn" type="button" onclick="pickgenre('Pop')">Pop</button><br><br><br>
-    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('HipHop')">Hip-Hop</button>
+    <button class="btn btn-default current-btn" type="button" onclick="pickgenre('HipHop')">Hip-Hop</button>-->
 
 </div>
     <script type="text/javascript">
+
+    //$('#select').dropdown();
     //this is test code to get the score db running. dont worry about it. im working on it -AH
 /*  var mongoUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://ahanso01:Allball634@ds161190.mlab.com:61190/heroku_b3ks50c0';
     var MongoClient = require('mongodb').MongoClient, format = require('util').format;
@@ -143,6 +172,7 @@
     
     var score = 0;
     var num_songs_on_playlist = 1;      //keeps track of the number of songs on the user's playlist
+    var total_num_songs = 0;
     //var user_playlist = [];
     
     var PlaylistSongs = [];
@@ -153,6 +183,19 @@
     var Rock_id = "465Mkzc2D8lpvtFfh761FF";
 
     var PlayerPlaylist = [];
+
+    function start_game(){
+        var selected_genre = document.getElementById("select_genre").options[document.getElementById('select_genre').selectedIndex].text;
+        var selected_num_songs = document.getElementById('select_num').options[document.getElementById('select_num').selectedIndex].text;
+
+        if ((selected_genre != "Genre") && (selected_num_songs != "Number of Songs")){
+            total_num_songs = selected_num_songs;
+
+            pickgenre(selected_genre);
+        }else{
+            window.alert("Please pick both your desired genre and the number of songs to be on your playlist");
+        }
+    }
 
     function meme_alert() {
         if (newly_chosen_song_id == "3cfOd4CMv2snFaKAnMdnvK"){ //alerts for the song All Star
@@ -216,8 +259,7 @@
             songUrl += newly_chosen_song_id;
             
             PlayerPlaylist.push(newly_chosen_song_id);
-            console.log(PlayerPlaylist);
-
+            
             var trackPreview = document.getElementById('song-preview0');
             var trackPreview_mobile = document.getElementById('song-preview0_mobile');
             var songTitle = document.getElementById('currentSong');
@@ -349,7 +391,9 @@
 
         elem.innerHTML = "Score: " + score;
         elem_mobile.innerHTML = "Score: " + score;
-        if (num_songs_on_playlist == 7){
+        if (num_songs_on_playlist == total_num_songs){
+            score = (score/(total_num_songs))*10;
+            score = Math.floor(score);
             //var username = prompt("Please enter your initials");
             //$('#submit-modal').modal({
             //    backdrop: 'static',
