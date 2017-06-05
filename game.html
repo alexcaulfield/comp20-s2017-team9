@@ -464,6 +464,9 @@
 
         $.ajax({
           url: song_url,
+          headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
           data: {
                   country: 'US'
                 },
