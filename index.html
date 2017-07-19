@@ -79,14 +79,14 @@
     function populateScoreboard(responseText){
       var username = '';
       var score = 0;
-      console.log(responseText);
+      //console.log(responseText);
       var tableData = JSON.parse(responseText);
       for (var i = 0; i < tableData.length; i++) {
         //console.log(tableData.length);
         tableData[i]._id = i + 1;
         //console.log(tableData[i]._id);
       }
-      console.log(tableData);
+      //console.log(tableData);
 
       $('#scoretable').bootstrapTable({
         data: tableData
